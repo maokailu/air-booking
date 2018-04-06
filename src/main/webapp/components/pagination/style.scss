@@ -1,0 +1,30 @@
+@import "../Adaptation/style.scss";
+
+.pagination {
+  display: flex;
+
+  @mixin pageItem ($background, $border) {
+    @include font-dpr(36px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    background: $background;
+    border: $border  solid  black;
+  }
+
+  .pageItem {
+    @include pageItem(white, 1px);
+  }
+
+  .points {
+    @include pageItem(#ccc, 0);
+  }
+
+  .current {
+    background: blue;
+  }
+}
+

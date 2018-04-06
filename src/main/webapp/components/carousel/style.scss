@@ -1,0 +1,39 @@
+@import '../../resources/global.scss';
+body{
+  margin: 0;
+}
+.tab{
+  margin: 10px;
+  .nav {
+    border: 1px solid gray;
+    display: flex;
+    background: #FFFFFF;
+    color: black;
+    span {
+      padding: 10px 0;
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid gray;
+    }
+    :last-child {
+      border-right: none;
+    }
+    .active {
+      color: orange;
+    }
+  }
+  .content{
+    overflow-x:hidden;
+    #flipsnap{
+      width: 300%;
+      display: flex;
+      overflow-x:hidden;
+      div{
+        flex: 1;
+        background: orange;
+        text-align: center;
+        padding: 50px 0;
+      }
+    }
+  }
+}

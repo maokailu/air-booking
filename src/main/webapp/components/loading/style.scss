@@ -1,0 +1,64 @@
+@-webkit-keyframes sk-circleFadeDelay {
+  0%,
+  39%,
+
+  100% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes sk-circleFadeDelay {
+  0%,
+  39%,
+  100% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+
+@mixin pip {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 15%;
+    background-color: #333;
+    border-radius: 100%;
+    animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
+  }
+}
+
+.container {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+
+  @for $i from 1 to 12 {
+    .pip#{$i} {
+      @include pip;
+      $transform: #{30 * $i}deg;
+
+      transform: rotate($transform);
+
+      &::before {
+        $animation-delay: $i/10 - 12/10;
+
+        animation-delay: #{$animation-delay}s;
+      }
+    }
+  }
+}

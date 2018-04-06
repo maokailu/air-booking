@@ -1,0 +1,45 @@
+group 'com.cumt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.14'
+//    compile group: 'org.aopalliance', name: 'com.springsource.org.aopalliance', version: '1.0.0'
+//    compile group: 'org.apache.commons', name: 'com.springsource.org.apache.commons.logging', version: '1.1.1'
+//    compile group: 'org.apache.log4j', name: 'com.springsource.org.apache.log4j', version: '1.2.15'
+//    compile group: 'com.alibaba', name: 'druid', version: '1.1.9'
+//    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
+//    compile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.5'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.5'
+//    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+//    compile group: 'javax.servlet.jsp.jstl', name: 'jstl', version: '1.2'
+//    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+//    compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.2.3'
+//    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.9-rc'
+//    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0'
+//    compile group: 'junit', name: 'junit', version: '4.12'
+//    compile group: 'org.springframework', name: 'spring-aop', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-aspects', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-beans', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-core', version: '5.0.4.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-expression', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-test', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-tx', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-web', version: '5.0.5.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.5.RELEASE'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

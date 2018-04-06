@@ -1,0 +1,16 @@
+src/vendor
+src/i18n
+src/resource
+
+dev
+debug
+demo
+
+**/*.css
+**/*.scss
+**/*.png
+**/*.svg
+**/*.md
+**/*.html
+**/*.xlsx
+**/*.json

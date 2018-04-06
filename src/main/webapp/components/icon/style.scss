@@ -1,0 +1,212 @@
+.success,
+.error {
+  display: block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #333;
+  background: #fff;
+  border-radius: 25px;
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 28px;
+    width: 4px;
+    background: #333;
+    border-radius: 10px;
+  }
+}
+
+.success::after,
+.success::before {
+  top: 0;
+  left: 10px;
+  transform: rotate(45deg);
+  height: 14px;
+  width: 2px;
+}
+.success::before {
+  top: 7px;
+  left: 4px;
+  transform: rotate(-45deg);
+  height: 6px;
+}
+
+.error::before,
+.error::after {
+  top: 7px;
+  left: 2px;
+  transform: rotate(-45deg);
+  height: 2px;
+  width: 12px;
+}
+.error::after {
+  transform: rotate(45deg);
+}
+
+.warning::before {
+  content: '!';
+  height: 0;
+  width: 0;
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  border: transparent solid;
+  border-bottom-color: #fff;
+  border-width: 0 10px 20px 10px;
+  color: #333;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 23px;
+  text-indent: -3px;
+}
+
+@-webkit-keyframes sk-circleFadeDelay {
+  0%,
+  39%,
+  100% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+@keyframes sk-circleFadeDelay {
+  0%,
+  39%,
+  100% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}
+@mixin pip {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 25%;
+    background-color: #fff;
+    border-radius: 100%;
+    animation: sk-circleFadeDelay 0.8s infinite ease-in-out both;
+  }
+}
+.loading {
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  @for $i from 0 to 9 {
+    .pip#{$i} {
+      @include pip;
+      $transform: #{45 * $i}deg;
+
+      transform: rotate($transform);
+
+      &::before {
+        $animation-delay: $i/10 - 8/10;
+
+        animation-delay: #{$animation-delay}s;
+      }
+    }
+  }
+}
+
+// arrow
+// 采用flex
+$width: 0.1rem;
+// 向右半角箭头
+.arrow-right-semiangle {
+  width: $width;
+  display: flex;
+
+  &::before {
+    content: '';
+    width: 0.7rem;
+    height: 0.2rem;
+    border-bottom: 0.1rem solid #ccc;
+  }
+
+  &::after {
+    content: '';
+    border-bottom: 0.3rem solid #ccc;
+    border-right: 0.3rem solid transparent;
+  }
+}
+// 向右三角箭头
+.arrow-right-triangle {
+  width: $width;
+
+  &::before {
+    content: '';
+    float: left;
+    width: 7rem;
+    height: 1rem;
+    border-bottom: 1rem solid #ccc;
+  }
+
+  &::after {
+    content: '';
+    float: right;
+    border-top: 1.5rem solid transparent;
+    border-left: 3rem solid #ccc;
+    border-bottom: 1.5rem solid transparent;
+  }
+}
+
+$height: 0.83rem;
+// 向上三角箭头
+.arrow-up-triangle {
+  height: $height;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: '';
+    border-bottom: 0.2rem solid #ccc;
+    border-left: 0.1rem solid transparent;
+    border-right: 0.1rem solid transparent;
+  }
+
+  &::after {
+    content: '';
+    width: 0.08rem;
+    height: 0.73rem;
+    border-right: 0.03rem solid #ccc;
+  }
+}
+
+// 向下三角箭头
+.arrow-down-triangle {
+  height: $height;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: '';
+    width: 0.08rem;
+    height: 0.73rem;
+    border-right: 0.03rem solid #ccc;
+  }
+
+  &::after {
+    content: '';
+    border-top: 0.2rem solid #ccc;
+    border-left: 0.1rem solid transparent;
+    border-right: 0.1rem solid transparent;
+  }
+}
