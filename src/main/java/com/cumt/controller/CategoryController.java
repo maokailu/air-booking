@@ -53,4 +53,15 @@ public class CategoryController {
 		List<Category> cs = categoryService.list();
 		return JSONArray.toJSON(cs).toString();
 	}
+	@RequestMapping("getLocation")
+	@ResponseBody
+	public String getLocation(HttpServletRequest request, HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		Category c = new Category();
+		c.setId(100);
+		c.setName("XuZhou");
+		JSONObject json= new JSONObject();
+		json.put("city", JSONObject.toJSON(c));
+		return json.toJSONString();
+	}
 }
