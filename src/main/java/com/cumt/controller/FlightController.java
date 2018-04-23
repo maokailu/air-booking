@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import com.cumt.pojo.Category;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,16 +23,24 @@ import java.util.List;
 public class FlightController {
     @Autowired
     FlightService flightService;
-    @Autowired
-    CategoryService categoryService;
-    @RequestMapping("fecthFlights1")
+    @RequestMapping("fecthFlightssss")
     @ResponseBody
-    public String fetchFlights(){
-//        List<Flight> cs = flightService.list();
-//        return JSONArray.toJSON(cs).toString();
-
-        List<Category> cs = categoryService.list();
-        return JSONArray.toJSON(cs).toString();
+    public String fecthFlights1(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        List<Flight> cs = flightService.list();
+        System.out.print("jj");
+        return JSONArray.toJSONString(cs);
+    }
+    @RequestMapping("getLocationFlight")
+    @ResponseBody
+    public String getLocationFlight(HttpServletRequest request, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Flight c = new Flight();
+        c.setId(100);
+        c.setName("XuZhouJJ");
+        JSONObject json= new JSONObject();
+        json.put("city", JSONObject.toJSON(c));
+        return json.toJSONString();
     }
 }
 

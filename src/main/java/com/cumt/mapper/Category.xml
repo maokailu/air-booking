@@ -4,6 +4,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 	<mapper namespace="com.cumt.mapper.CategoryMapper">
+		<!--<resultMap id="BaseResultMap" type="com.cumt.pojo.Category">-->
+			<!--<id column="id" jdbcType="INT" property="id" />-->
+			<!--&lt;!&ndash;<result column="flight_id" jdbcType="INT" property="flightId" />&ndash;&gt;-->
+			<!--<result column="flight_no" jdbcType="INT" property="id" />-->
+		<!--</resultMap>-->
 	    <insert id="add" parameterType="Category" >
 	        insert into flight ( name ) values (#{name})
 	    </insert>
@@ -19,7 +24,7 @@
 	    <update id="update" parameterType="Category" >
 	        update flight set name=#{name} where id=#{id}
 	    </update>
-	    <select id="list" resultType="Category">
+	    <select id="list" resultType="Category" resultMap="BaseResultMap">
 	        select * from flight
 	    </select>
 	</mapper>

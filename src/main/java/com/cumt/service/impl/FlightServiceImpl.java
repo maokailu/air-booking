@@ -17,8 +17,5 @@ public class FlightServiceImpl  implements FlightService {
     public List<Flight> list(){
         return flightMapper.list();
     };
-    public Flight get(int id){
-        return flightMapper.get(id);
-    };
 
 }

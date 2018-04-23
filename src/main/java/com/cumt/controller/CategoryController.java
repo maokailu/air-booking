@@ -1,12 +1,10 @@
 package com.cumt.controller;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.cumt.pojo.Flight;
 import com.cumt.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,22 +26,10 @@ public class CategoryController {
 	@Autowired
 	FlightService flightService;
 
-	@RequestMapping("gotologin")
-	public ModelAndView gotologin(){
+	@RequestMapping("goToLogin")
+	public ModelAndView goToLogin(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
-		return mav;
-	}
-    @RequestMapping("gototest")
-    public ModelAndView home(){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("test");
-        return mav;
-    }
-	@RequestMapping("gotolist")
-	public ModelAndView gotolist(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("list");
 		return mav;
 	}
 	@RequestMapping("fecthFlights")
@@ -51,6 +37,7 @@ public class CategoryController {
 	public String fecthFlights(HttpServletRequest request, HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
 		List<Category> cs = categoryService.list();
+		System.out.print("jj");
 		return JSONArray.toJSON(cs).toString();
 	}
 	@RequestMapping("getLocation")
@@ -60,6 +47,7 @@ public class CategoryController {
 		Category c = new Category();
 		c.setId(100);
 		c.setName("XuZhou");
+		c.setFlightId(33);
 		JSONObject json= new JSONObject();
 		json.put("city", JSONObject.toJSON(c));
 		return json.toJSONString();
