@@ -24,8 +24,8 @@
 	    <update id="update" parameterType="Category" >
 	        update flight set name=#{name} where id=#{id}
 	    </update>
-	    <select id="list" resultType="Category" resultMap="BaseResultMap">
-	        select * from flight
-	    </select>
+	    <!--<select id="list" resultType="Category" resultMap="BaseResultMap">-->
+	        <!--select * from flight-->
+	    <!--</select>-->
 	</mapper>
 

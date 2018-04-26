@@ -17,5 +17,8 @@ public class FlightServiceImpl  implements FlightService {
     public List<Flight> list(Integer departCityCode, String name ){
         return flightMapper.list();
     };
+    public List<Flight> query(){
+        return flightMapper.query();
+    };
 
 }

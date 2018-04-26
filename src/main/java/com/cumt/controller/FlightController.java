@@ -29,7 +29,8 @@ public class FlightController {
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
 
-        List<Flight> flights = flightService.list(100, "China XuZhou");
+//        List<Flight> flights = flightService.query();
+        List<Flight> flights = flightService.list(100, "");
         return JSONArray.toJSONString(flights);
     }
     @RequestMapping(value ="getLocationFlight")

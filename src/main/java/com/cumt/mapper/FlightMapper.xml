@@ -10,7 +10,10 @@
 <!--</mapper>-->
 <mapper namespace="com.cumt.mapper.FlightMapper">
     <select id="list" resultType="Flight">
-        select * from flight where flight_id = 100
+        select * from flight where flight_id =100
+    </select>
+    <select id="query" resultType="Flight">
+        select * from flight
     </select>
 </mapper>
 
