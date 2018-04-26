@@ -1,13 +1,14 @@
 package com.cumt.pojo;
 
 public class Flight {
-    private int id;
+    private Integer flight_id;
     private String name;
-    public int getId() {
-        return id;
+
+    public Integer getFlightId() {
+        return flight_id;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setFlightId(Integer flightId) {
+        this.flight_id = flightId;
     }
     public String getName() {
         return name;
@@ -17,6 +18,6 @@ public class Flight {
     }
     @Override
     public String toString() {
-        return "Flight [id=" + id + ", name=" + name + "]";
+        return "Flight [flightId=" + flight_id + ", name=" + name + "]";
     }
 }
