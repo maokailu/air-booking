@@ -33,17 +33,31 @@ public class FlightController {
         List<Flight> flights = flightService.list(100, "");
         return JSONArray.toJSONString(flights);
     }
+//    @RequestMapping(value ="getLocationFlight")
+//    @ResponseBody
+//    public String getLocationFlight(@RequestParam(required=false,defaultValue = "bbb")String name, HttpServletRequest request, HttpServletResponse response){
+//        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
+//        response.setHeader("Access-Control-Allow-Method", "POST, GET,OPTIONS");
+//        response.setHeader("Access-Control-Allow-Headers", "content-type");
+//        Flight flight = new Flight();
+//        flight.setFlightId(100);
+//        flight.setName("XuZhou");
+//        JSONObject json= new JSONObject();
+//        json.put("city", JSONObject.toJSON(flight));
+//
+//        return json.toJSONString();
+//    }
     @RequestMapping(value ="getLocationFlight")
     @ResponseBody
-    public String getLocationFlight(@RequestParam(required=false,defaultValue = "bbb")String name, HttpServletRequest request, HttpServletResponse response){
+    public String getLocationFlight(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
-        Flight flight = new Flight();
-        flight.setFlightId(100);
-        flight.setName("XuZhou");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET,OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "content-type");
+        Flight city = new Flight();
+        city.setFlightId(flight.getFlightId());
+        city.setName(flight.getName());
         JSONObject json= new JSONObject();
-        json.put("city", JSONObject.toJSON(flight));
+        json.put("city", JSONObject.toJSON(city));
 
         return json.toJSONString();
     }
