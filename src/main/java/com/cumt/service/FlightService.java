@@ -6,6 +6,5 @@ import com.cumt.pojo.Flight;
 
 public interface FlightService {
 
-    List<Flight> list(Integer departCityCode, String name);
-    List<Flight> query();
+    List<Flight> list(int id, String name);
 }

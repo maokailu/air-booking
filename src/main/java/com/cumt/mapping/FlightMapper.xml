@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cumt.mapper.FlightMapper">
+    <!--<resultMap id="BaseResultMap" type="com.cumt.pojo.Flight">-->
+        <!--<id column="flight_id" jdbcType="INTEGER" property="id" />-->
+        <!--<result column="name" jdbcType="VARCHAR" property="name" />-->
+        <!--&lt;!&ndash;<result column="flightId" jdbcType="INTEGER" property="flightId" />&ndash;&gt;-->
+    <!--</resultMap>-->
+    <select id="list" parameterType="_int" resultType="Flight">
+        select * from flight where id = 300;
+    </select>
+</mapper>
+

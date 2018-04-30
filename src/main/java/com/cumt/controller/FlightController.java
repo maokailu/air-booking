@@ -24,46 +24,25 @@ public class FlightController {
     FlightService flightService;
     @RequestMapping("fecthFlightsFlight")
     @ResponseBody
-    public String fecthFlights1(@RequestParam(required=false,defaultValue = "1") String name, HttpServletRequest request, HttpServletResponse response) {
+    public String fecthFlights1(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
-
-//        List<Flight> flights = flightService.query();
-        List<Flight> flights = flightService.list(100, "");
+        List<Flight> flights = flightService.list(100, "Shenzhen Airlines");
         return JSONArray.toJSONString(flights);
     }
 //    @RequestMapping(value ="getLocationFlight")
 //    @ResponseBody
-//    public String getLocationFlight(@RequestParam(required=false,defaultValue = "bbb")String name, HttpServletRequest request, HttpServletResponse response){
+//    public String getLocationFlight(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response){
 //        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
 //        response.setHeader("Access-Control-Allow-Method", "POST, GET,OPTIONS");
 //        response.setHeader("Access-Control-Allow-Headers", "content-type");
-//        Flight flight = new Flight();
-//        flight.setFlightId(100);
-//        flight.setName("XuZhou");
+//        Flight city = new Flight();
+//        city.setFlightId(flight.getFlightId());
+//        city.setName(flight.getName());
 //        JSONObject json= new JSONObject();
-//        json.put("city", JSONObject.toJSON(flight));
+//        json.put("city", JSONObject.toJSON(city));
 //
 //        return json.toJSONString();
-//    }
-    @RequestMapping(value ="getLocationFlight")
-    @ResponseBody
-    public String getLocationFlight(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET,OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "content-type");
-        Flight city = new Flight();
-        city.setFlightId(flight.getFlightId());
-        city.setName(flight.getName());
-        JSONObject json= new JSONObject();
-        json.put("city", JSONObject.toJSON(city));
-
-        return json.toJSONString();
-    }
-//    public static void main d(String[] args) {
-//        ServerLocation location = obj.getLocation("206.190.36.45");
-//        System.out.println(location);
 //    }
 }
 

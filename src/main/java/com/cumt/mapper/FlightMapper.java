@@ -6,7 +6,6 @@ import com.cumt.pojo.Flight;
 
 public interface FlightMapper {
 
-    List<Flight> list();
-    List<Flight> query();
+    List<Flight> list(int id);
 
 }

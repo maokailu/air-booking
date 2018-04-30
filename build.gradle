@@ -13,7 +13,14 @@ repositories {
     mavenCentral()
     jcenter()
 }
-
+sourceSets {
+    main {
+        resources {
+            srcDir("src/main/resources")
+            srcDir("src/main/java/com/cumt/mapping")
+        }
+    }
+}
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.14'
     compile group: 'org.aopalliance', name: 'com.springsource.org.aopalliance', version: '1.0.0'
