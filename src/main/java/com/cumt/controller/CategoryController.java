@@ -32,17 +32,17 @@ public class CategoryController {
 		mav.setViewName("login");
 		return mav;
 	}
-	@RequestMapping("fecthFlights")
+	@RequestMapping("fecthFlights1")
 	@ResponseBody
-	public String fecthFlights(HttpServletRequest request, HttpServletResponse response){
+	public String fecthFlights1(HttpServletRequest request, HttpServletResponse response){
         response.setHeader("Access-Control-Allow-Origin", "*");
 		List<Category> cs = categoryService.list();
 		System.out.print("jj");
 		return JSONArray.toJSON(cs).toString();
 	}
-	@RequestMapping("getLocation")
+	@RequestMapping("getLocation1")
 	@ResponseBody
-	public String getLocation(HttpServletRequest request, HttpServletResponse response){
+	public String getLocation1(HttpServletRequest request, HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		Category c = new Category();
 		c.setId(100);

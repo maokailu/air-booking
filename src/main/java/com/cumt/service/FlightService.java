@@ -6,5 +6,5 @@ import com.cumt.pojo.Flight;
 
 public interface FlightService {
 
-    List<Flight> list(int id, String name);
+    List<Flight> list(String departCityCode, String arriveCityCode);
 }

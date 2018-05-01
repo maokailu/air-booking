@@ -2,22 +2,29 @@ package com.cumt.pojo;
 
 public class Flight {
     private int id;
-    private String name;
     public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    private String departCityCode;
+    public String getDepartCityCode() {
+        return departCityCode;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartCityCode(String departCityCode) {
+        this.departCityCode = departCityCode;
+    }
+    private String arriveCityCode;
+    public String getArriveCityCode() {
+        return arriveCityCode;
+    }
+    public void setArriveCityCode(String arriveCityCode) {
+        this.arriveCityCode = arriveCityCode;
     }
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", name=" + name + "]";
+        return "Category [departCityCode=" + departCityCode + ", arriveCityCode=" + arriveCityCode + "]";
     }
 }

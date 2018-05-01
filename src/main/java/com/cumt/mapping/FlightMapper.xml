@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cumt.mapper.FlightMapper">
-    <!--<resultMap id="BaseResultMap" type="com.cumt.pojo.Flight">-->
-        <!--<id column="flight_id" jdbcType="INTEGER" property="id" />-->
-        <!--<result column="name" jdbcType="VARCHAR" property="name" />-->
-        <!--&lt;!&ndash;<result column="flightId" jdbcType="INTEGER" property="flightId" />&ndash;&gt;-->
-    <!--</resultMap>-->
-    <select id="list" parameterType="_int" resultType="Flight">
-        select * from flight where id = 300;
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.Flight">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="depart_city_code" jdbcType="VARCHAR" property="departCityCode" />
+        <result column="arrive_city_code" jdbcType="VARCHAR" property="arriveCityCode" />
+    </resultMap>
+    <select id="list" resultMap="BaseResultMap" resultType="Flight">
+        select * from flight where depart_city_code = #{0} and arrive_city_code = #{1};
     </select>
 </mapper>
 

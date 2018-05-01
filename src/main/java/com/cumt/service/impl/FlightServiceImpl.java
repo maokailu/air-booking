@@ -14,7 +14,7 @@ public class FlightServiceImpl  implements FlightService {
     FlightMapper flightMapper;
 
 
-    public List<Flight> list(int id, String name ){
-        return flightMapper.list(id);
+    public List<Flight> list(String departCityCode, String arriveCityCode){
+        return flightMapper.list(departCityCode,arriveCityCode);
     };
 }

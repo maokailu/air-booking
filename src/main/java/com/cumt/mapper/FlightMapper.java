@@ -6,6 +6,6 @@ import com.cumt.pojo.Flight;
 
 public interface FlightMapper {
 
-    List<Flight> list(int id);
+    List<Flight> list(String departCityCode, String arriveCityCode);
 
 }

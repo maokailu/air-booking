@@ -42,11 +42,11 @@
     </init-param>
     <init-param>
         <param-name>cors.supportedHeaders</param-name>
-        <param-value>Accept, Origin, XRequestedWith, Content-Type, LastModified</param-value>
+        <param-value>Accept, Origin, XRequestedWith, Content-Type, LastModified, Set-Cookie</param-value>
     </init-param>
     <init-param>
         <param-name>cors.exposedHeaders</param-name>
-        <param-value>SetCookie</param-value>
+        <param-value>Set-Cookie</param-value>
     </init-param>
     <init-param>
         <param-name>cors.supportsCredentials</param-name>
