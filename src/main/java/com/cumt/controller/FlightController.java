@@ -49,8 +49,10 @@ public class FlightController {
         response.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
         response.setHeader("Set-Cookie", "uid=maokailu");
         City city = new City();
-        city.setId(2);
+        city.setId(1);
         city.setCityCode("SHA");
+        city.setCityName("上海");
+        city.setCountryId(0);
         JSONObject json= new JSONObject();
         json.put("city", JSONObject.toJSON(city));
 
