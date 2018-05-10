@@ -9,5 +9,5 @@ import java.util.List;
  * Created by Administrator on 2018-05-02.
  */
 public interface CityService {
-    List<City> queryByCountryId(int countryId);
+    List<City> getHotCitys();
 }

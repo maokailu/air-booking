@@ -30,20 +30,16 @@ public class CityController {
     public String getHotDestinations(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
-        List<City> citys = cityService.queryByCountryId(0);
+        List<City> citys = cityService.getHotCitys();
         Map<String, List> hotDestination = new HashMap<String, List>();
-        List list1 = new ArrayList();
-        List list2 = new ArrayList();
+        Map<String, List> countrys = new HashMap<String, List>();
         for (City city : citys) {
-            if(city.getCountryId() == 0){
-                list1.add(city);
-            } else if(city.getCountryId() == 1){
-                list2.add(city);
+            if(countrys.get(city.getCountryName()) != null){
+                countrys.get(city.getCountryName()).add(city);
+            } else {
+                countrys.put(city.getCountryName(), new ArrayList());
             }
         }
-        hotDestination.put("china", list1);
-        hotDestination.put("United States", list2);
-        System.out.print(citys);
-        return JSONArray.toJSONString(hotDestination);
+        return JSONArray.toJSONString(countrys);
     }
 }

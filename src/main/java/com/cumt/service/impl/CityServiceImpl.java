@@ -19,7 +19,7 @@ public class CityServiceImpl implements CityService {
     @Autowired
     public CityMapper cityMapper;
 
-    public List<City> queryByCountryId(int countryId){
-        return cityMapper.queryByCountry(countryId);
+    public List<City> getHotCitys(){
+        return cityMapper.getHotCitys();
     };
 }
