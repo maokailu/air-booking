@@ -31,13 +31,15 @@ public class CityController {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<City> citys = cityService.getHotCitys();
-        Map<String, List> hotDestination = new HashMap<String, List>();
-        Map<String, List> countrys = new HashMap<String, List>();
+        Map<String, ArrayList> hotDestination = new HashMap<String, ArrayList>();
+        Map<String, ArrayList> countrys = new HashMap<String, ArrayList>();
         for (City city : citys) {
             if(countrys.get(city.getCountryName()) != null){
                 countrys.get(city.getCountryName()).add(city);
             } else {
-                countrys.put(city.getCountryName(), new ArrayList());
+                ArrayList list = new ArrayList<>();
+                list.add(city);
+                countrys.put(city.getCountryName(), list);
             }
         }
         return JSONArray.toJSONString(countrys);

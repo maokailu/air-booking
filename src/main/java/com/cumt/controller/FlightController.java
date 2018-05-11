@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -30,16 +32,27 @@ public class FlightController {
     public String getFlights(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
-        Cookie[] cookies = request.getCookies();
-        for(Cookie cookie : cookies){
-            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
-        }
-        Cookie cookie = new Cookie("sid", "mmm");
-        cookie.setMaxAge(30 * 60);
-        cookie.setPath("/");
-        System.out.println("已添加===============");
-        response.addCookie(cookie);
-        List<Flight> flights = flightService.list(flight.getDepartCityCode(), flight.getArriveCityCode());
+//        Cookie[] cookies = request.getCookies();
+//        for(Cookie cookie : cookies){
+//            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
+//        }
+//        Cookie cookie = new Cookie("sid", "mmm");
+//        cookie.setMaxAge(30 * 60);
+//        cookie.setPath("/");
+//        System.out.println("已添加===============");
+//        response.addCookie(cookie);
+        int flightType = 0;
+        String departCityCode = "SHA";
+        String arriveCityCode = "BJS";
+        String departAirportCode = "";
+        String arriveAirportCode = "";
+        Timestamp departTime = new Timestamp(System.currentTimeMillis());
+        Timestamp returnTime = new Timestamp(System.currentTimeMillis());
+        int classType = 0;
+        int passenger = 3;
+
+        List<Flight> flights = flightService.getFlightsBySearch(flightType, departCityCode,arriveCityCode, departAirportCode,arriveAirportCode, departTime, returnTime, classType, passenger);
+        System.out.print(flights);
         return JSONArray.toJSONString(flights);
     }
 
