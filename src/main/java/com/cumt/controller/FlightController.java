@@ -5,8 +5,10 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.cumt.pojo.City;
 import com.cumt.pojo.Flight;
+import com.cumt.pojo.FlightSearch;
 import com.cumt.service.CategoryService;
 import com.cumt.service.FlightService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.corba.se.spi.activation.LocatorPackage.ServerLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class FlightController {
     FlightService flightService;
     @RequestMapping("getFlights")
     @ResponseBody
-    public String getFlights(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
+    public List<Flight> getFlights(@RequestBody FlightSearch flightSearch, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
 //        Cookie[] cookies = request.getCookies();
@@ -42,18 +44,28 @@ public class FlightController {
 //        System.out.println("已添加===============");
 //        response.addCookie(cookie);
         int flightType = 0;
-        String departCityCode = "SHA";
-        String arriveCityCode = "BJS";
-        String departAirportCode = "";
-        String arriveAirportCode = "";
+        String departCityCode = flightSearch.getDepartCityCode();
+        String arriveCityCode = flightSearch.getArriveCityCode();
+        String departAirportCode = flightSearch.getArriveAirportCode();
+        String arriveAirportCode = flightSearch.getArriveAirportCode();
         Timestamp departTime = new Timestamp(System.currentTimeMillis());
         Timestamp returnTime = new Timestamp(System.currentTimeMillis());
-        int classType = 0;
-        int passenger = 3;
+        int classType = flightSearch.getClassType();
+        int passenger = flightSearch.getPassenger();
+//        if(flightSearch.getFirstClassCount() != 0){
+//            classType = 0;
+//            passenger = flightSearch.getFirstClassCount();
+//        } else if(flightSearch.getBusinessClassCount() != 0){
+//            classType = 1;
+//            passenger = flightSearch.getBusinessClassCount();
+//        } else{
+//            classType = 2;
+//            passenger = flightSearch.getEconomyClassCount();
+//        }
 
         List<Flight> flights = flightService.getFlightsBySearch(flightType, departCityCode,arriveCityCode, departAirportCode,arriveAirportCode, departTime, returnTime, classType, passenger);
         System.out.print(flights);
-        return JSONArray.toJSONString(flights);
+        return flights;
     }
 
     @RequestMapping(value ="getCurrentCity")

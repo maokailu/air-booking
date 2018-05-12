@@ -21,9 +21,44 @@
     </resultMap>
     <select id="getFlightsBySearch" resultMap="BaseResultMap" resultType="Flight">
         select * from `flight` where flight.depart_airport_code in
-         (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{1})
+         (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{departCityCode})
         and flight.arrive_airport_code in
-         (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{2})
+         (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{arriveCityCode})
+        <choose>
+            <when test="classType == 0">
+                and first_class_count > #{passenger}
+            </when>
+            <when test="classType == 1">
+                and business_class_count > #{passenger}
+            </when>
+            <otherwise>
+                and economy_class_count > #{passenger}
+            </otherwise>
+        </choose>
     </select>
+
+    <!--<sql id="base_select">-->
+        <!--id,city_id-->
+    <!--</sql>-->
+    <!--<sql id="base_from">-->
+        <!--FROM city-->
+    <!--</sql>-->
+
+    <!--<sql id="base_where">-->
+        <!--<where>-->
+            <!--<if test="city_id!=null">-->
+                <!--AND city_id = #{cityId, javaType=INTEGER}-->
+            <!--</if>-->
+            <!--<choose>-->
+
+            <!--</choose>-->
+        <!--</where>-->
+    <!--</sql>-->
+
+    <!--<select id="test" parameterMap="map" resultMap="BaseResultMap">-->
+        <!--SELECT <include refid="base_select"/>-->
+        <!--<include refid="base_from"/>-->
+        <!--<include refid="base_where"/>-->
+    <!--</select>-->
 </mapper>
 

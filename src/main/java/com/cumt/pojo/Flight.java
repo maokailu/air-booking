@@ -1,11 +1,12 @@
 package com.cumt.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.DateTimeException;
 
-public class Flight {
+public class Flight implements Serializable {
     private long id;
     private String flightId;
     private String planeId;

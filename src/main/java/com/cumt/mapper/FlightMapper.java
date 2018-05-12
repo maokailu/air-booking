@@ -5,9 +5,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.cumt.pojo.Flight;
+import org.apache.ibatis.annotations.Param;
 
 public interface FlightMapper {
 
-    List<Flight> getFlightsBySearch(int flightType, String departCityCode, String arriveCityCode,  String departAirportCode, String arriveAirportCode, Timestamp departTime, Timestamp arriveTime, int classType, int passenger);
+    List<Flight> getFlightsBySearch(@Param("flightType") int flightType,@Param("departCityCode") String departCityCode,@Param("arriveCityCode") String arriveCityCode,@Param("departAirportCode") String departAirportCode,@Param("arriveAirportCode") String arriveAirportCode,@Param("departTime") Timestamp departTime,@Param("arriveTime") Timestamp arriveTime,@Param("classType") int classType,@Param("passenger") int passenger);
 
 }
