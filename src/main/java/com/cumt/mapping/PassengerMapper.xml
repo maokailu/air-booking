@@ -6,9 +6,12 @@
 <mapper namespace="com.cumt.mapper.PassengerMapper">
     <resultMap id="BaseResultMap" type="com.cumt.pojo.Passenger">
         <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="passenger_id" jdbcType="VARCHAR" property="passengerId" />
         <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="ownership" jdbcType="VARCHAR" property="ownership" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
     </resultMap>
-    <select id="getPassengersByUserId" resultMap="BaseResultMap" resultType="Passenger">
+    <select id="getPassengersByUserId" resultMap="BaseResultMap">
           select * from `passenger` INNER JOIN `user` on `passenger`.user_id = `user`.user_id where `user`.user_id = 0
     </select>
 </mapper>

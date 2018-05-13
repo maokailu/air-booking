@@ -1,9 +1,7 @@
 package com.cumt.controller;
 
-import com.cumt.pojo.Flight;
-import com.cumt.pojo.FlightSearch;
-import com.cumt.pojo.Passenger;
-import com.cumt.service.FlightService;
+import com.cumt.pojo.Order;
+import com.cumt.service.OrderService;
 import com.cumt.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,21 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018-05-13.
+ * Created by Administrator on 2018-05-14.
  */
-
 @Controller
 @RequestMapping("")
-public class PassengerController {
+public class OrderController {
     @Autowired
-    PassengerService passengerService;
-    @RequestMapping("getPassengers")
+    OrderService orderService;
+    @RequestMapping("createOrder")
     @ResponseBody
-    public List<Passenger> getFlights(HttpServletRequest request, HttpServletResponse response) {
+    public void getFlights(@RequestBody Order order, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
-        List<Passenger> passengers = passengerService.getPassengersByUserId(0);
-        System.out.print(passengers);
-        return passengers;
+        int num = orderService.addOrder(order);
+        System.out.print(num);
     }
 }
