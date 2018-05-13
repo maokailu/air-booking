@@ -2,6 +2,8 @@ package com.cumt.test;
 
 import java.util.List;
 
+import com.cumt.mapper.PassengerMapper;
+import com.cumt.pojo.Passenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ public class MybatisTest {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
+	private PassengerMapper passengerMapper;
 
 	@Test
 	public void testAdd() {
@@ -32,6 +35,11 @@ public class MybatisTest {
 		for (Category c : cs) {
 			System.out.println(c.getName());
 		}
+	}
+	@Test
+	public void test() {
+		System.out.println(categoryMapper);
+		List<Passenger> cs=passengerMapper.getPassengersByUserId(0);
 	}
 
 }

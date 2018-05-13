@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cumt.mapper.PassengerMapper">
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.Passenger">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    <select id="getPassengersByUserId" resultMap="BaseResultMap" resultType="Passenger">
+          select * from `passenger` INNER JOIN `user` on `passenger`.user_id = `user`.user_id where `user`.user_id = 0
+    </select>
+</mapper>
