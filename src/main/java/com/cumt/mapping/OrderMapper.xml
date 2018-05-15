@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cumt.mapper.OrderMapper">
     <resultMap id="BaseResultMap" type="com.cumt.pojo.Order">
         <id column="id" jdbcType="BIGINT" property="id" />
     </resultMap>
     <insert id="addOrder" parameterType="Order" >
-        insert into `order` ( order_id, user_id, user_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, address, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{userName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{address}, #{cellphone}, #{email}, #{zipCode})
+        insert into `order` ( order_id, user_id, contact_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{contactName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{cellphone}, #{email}, #{zipCode})
     </insert>
 </mapper>

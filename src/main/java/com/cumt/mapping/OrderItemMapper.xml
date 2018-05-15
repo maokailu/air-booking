@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cumt.mapper.OrderItemMapper">
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.OrderItem">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+    <insert id="addOrderItem">
+        insert into `order_item`(order_item_id, order_id, ticket_id, passenger_id)
+        select 5, 0, ticket.ticket_id, 0 from ticket INNER JOIN flight on ticket.flight_id = flight.flight_id where flight.first_class_count > 1 and ticket.flight_id = 1
+    </insert>
+</mapper>

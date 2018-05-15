@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cumt.mapper.TicketMapper">
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.Ticket">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="ticket_id" jdbcType="VARCHAR" property="ticketId" />
+    </resultMap>
+    <select id="getTicketId" parameterType="Ticket">
+        select ticket.ticket_id from `ticket` INNER JOIN `flight` on ticket.flight_id = flight.flight_id where flight.first_class_count > 1 and ticket.flight_id = 1
+    </select>
+</mapper>

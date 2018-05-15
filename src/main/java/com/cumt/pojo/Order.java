@@ -2,6 +2,7 @@ package com.cumt.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018-05-14.
@@ -10,24 +11,24 @@ public class Order {
     private int id;
     private String orderId;
     private String userId;
-    private String userName;
+    private String contactName;
     private Date orderDate;
     private int orderState;
     private BigDecimal totalTicketPrice;
     private BigDecimal totalFuelSurcharge;
     private BigDecimal totalAirportTax;
     private BigDecimal totalPrice;
-    private String address;
     private String cellphone;
     private String email;
     private String zipCode;
 
-    public String getUserName() {
-        return userName;
+
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     public Date getOrderDate() {
@@ -78,13 +79,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getCellphone() {
         return cellphone;
