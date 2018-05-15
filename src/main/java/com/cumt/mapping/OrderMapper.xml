@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <id column="id" jdbcType="BIGINT" property="id" />
     </resultMap>
     <insert id="addOrder" parameterType="Order" >
-        insert into `order` ( order_id, user_id, contact_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{contactName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{cellphone}, #{email}, #{zipCode})
+        insert into `order` (order_id, user_id, contact_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{contactName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{cellphone}, #{email}, #{zipCode})
     </insert>
+
+    <select id="getOrderDetail">
+        select order_id, flight.*, passenger.* from `order` inner JOIN  `order_item` on  `order`.order_id = `order_item`.order_id where `order`.order_id = #{orderId}
+    </select>
 </mapper>

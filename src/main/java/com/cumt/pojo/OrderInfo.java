@@ -1,5 +1,7 @@
 package com.cumt.pojo;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018-05-15.
  */
@@ -7,6 +9,15 @@ public class OrderInfo {
     private Order order;
     private OrderItem orderItem;
     private Ticket ticket;
+    private List<Passenger> passengers;
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
 
     public Order getOrder() {
         return order;

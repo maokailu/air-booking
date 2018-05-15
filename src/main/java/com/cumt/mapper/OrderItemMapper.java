@@ -1,10 +1,11 @@
 package com.cumt.mapper;
 
 import com.cumt.pojo.OrderItem;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by Administrator on 2018-05-15.
  */
 public interface OrderItemMapper {
-    public int addOrderItem(OrderItem orderItem);
+    public int addOrderItem(@Param("orderItem")OrderItem orderItem, @Param("flightId")String flightId, @Param("cabinClassId")int cabinClassId);
 }

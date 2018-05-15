@@ -16,4 +16,8 @@ public class FlightServiceImpl  implements FlightService {
     public List<Flight> getFlightsBySearch(int flightType, String departCityCode, String arriveCityCode,  String departAirportCode, String arriveAirportCode, Timestamp departTime, Timestamp arriveTime, int classType, int passenger){
         return flightMapper.getFlightsBySearch(flightType,departCityCode,arriveCityCode, departAirportCode, arriveAirportCode, departTime, arriveTime, classType, passenger);
     };
+    public int minusClassCount(String flightId, int classType){
+        return flightMapper.minusClassCount(flightId,classType);
+    };
+
 }

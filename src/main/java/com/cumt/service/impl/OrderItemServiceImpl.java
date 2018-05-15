@@ -15,7 +15,7 @@ public class OrderItemServiceImpl implements OrderItemService{
     @Autowired
     OrderItemMapper orderItemMapper;
 
-    public int addOrderItem(OrderItem orderItem){
-        return orderItemMapper.addOrderItem(orderItem);
+    public int addOrderItem(OrderItem orderItem, String flightId, int cabinClassId){
+        return orderItemMapper.addOrderItem(orderItem, flightId, cabinClassId);
     };
 }

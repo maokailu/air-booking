@@ -37,6 +37,24 @@
         </choose>
     </select>
 
+    <update id="minusClassCount" >
+        update flight
+        <set>
+            <choose>
+                <when test="classType == 0">
+                    flight.first_class_count = flight.first_class_count - 1
+                </when>
+                <when test="classType == 1">
+                    flight.business_class_count = flight.business_class_count - 1
+                </when>
+                <otherwise>
+                    flight.economy_class_count = flight.economy_class_count - 1
+                </otherwise>
+            </choose>
+            where flight_id = #{flightId}
+        </set>
+</update>
+
     <!--<sql id="base_select">-->
         <!--id,city_id-->
     <!--</sql>-->
