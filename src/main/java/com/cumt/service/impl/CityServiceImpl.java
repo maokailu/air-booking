@@ -22,4 +22,7 @@ public class CityServiceImpl implements CityService {
     public List<City> getHotCitys(){
         return cityMapper.getHotCitys();
     };
+    public City getCurrentCityByCityNum(String cityNum){
+        return cityMapper.getCurrentCityByCityNum(cityNum);
+    };
 }

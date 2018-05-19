@@ -43,15 +43,15 @@ public class FlightController {
 //        cookie.setPath("/");
 //        System.out.println("已添加===============");
 //        response.addCookie(cookie);
-        int flightType = 0;
-        String departCityCode = flightSearch.getDepartCityCode();
-        String arriveCityCode = flightSearch.getArriveCityCode();
-        String departAirportCode = flightSearch.getArriveAirportCode();
-        String arriveAirportCode = flightSearch.getArriveAirportCode();
-        Timestamp departTime = new Timestamp(System.currentTimeMillis());
-        Timestamp returnTime = new Timestamp(System.currentTimeMillis());
-        int classType = flightSearch.getClassType();
-        int passenger = flightSearch.getPassenger();
+//        int flightType = 0;
+//        String departCityCode = flightSearch.getDepartCityCode();
+//        String arriveCityCode = flightSearch.getArriveCityCode();
+//        String departAirportCode = flightSearch.getArriveAirportCode();
+//        String arriveAirportCode = flightSearch.getArriveAirportCode();
+//        Timestamp departTime = new Timestamp(System.currentTimeMillis());
+//        Timestamp returnTime = new Timestamp(System.currentTimeMillis());
+//        int classType = flightSearch.getClassType();
+//        int passenger = flightSearch.getPassenger();
 //        if(flightSearch.getFirstClassCount() != 0){
 //            classType = 0;
 //            passenger = flightSearch.getFirstClassCount();
@@ -63,7 +63,8 @@ public class FlightController {
 //            passenger = flightSearch.getEconomyClassCount();
 //        }
 
-        List<Flight> flights = flightService.getFlightsBySearch(flightType, departCityCode,arriveCityCode, departAirportCode,arriveAirportCode, departTime, returnTime, classType, passenger);
+//        List<Flight> flights = flightService.getFlightsBySearch(flightType, departCityCode,arriveCityCode, departAirportCode,arriveAirportCode, departTime, returnTime, classType, passenger);
+        List<Flight> flights = flightService.getFlightsBySearch(flightSearch);
         System.out.print(flights);
         return flights;
     }
@@ -78,7 +79,7 @@ public class FlightController {
         City city = new City();
         city.setCityCode("SHA");
         city.setCityName("上海");
-        city.setCountryName("t");
+        city.getCountryCode();
         JSONObject json= new JSONObject();
         json.put("city", JSONObject.toJSON(city));
 //        String url = "http://api.map.baidu.com/location/ip?ak=MTsoYO1kC64Gagtb9FdsXg2fbyyQvoTA";

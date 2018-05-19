@@ -8,9 +8,12 @@
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="city_name" jdbcType="VARCHAR" property="cityName" />
         <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
-        <result column="country_name" jdbcType="INTEGER" property="countryName" />
+        <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
     </resultMap>
     <select id="getHotCitys" resultMap="BaseResultMap" resultType="City">
-          select city.id, country.country_name, city.city_code, city.city_name from city INNER JOIN hot_city INNER JOIN country on city.city_code = hot_city.city_code and city.country_code=country.country_code
+          select city.id, city.country_code, city.city_code, city.city_name from city INNER JOIN hot_city INNER JOIN country on city.city_code = hot_city.city_code and city.country_code=country.country_code
+    </select>
+    <select id="getCurrentCityByCityNum" resultMap="BaseResultMap">
+        select city.city_code, city.city_name from city where city_num = #{cityNum}
     </select>
 </mapper>

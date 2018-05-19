@@ -9,15 +9,17 @@ public class City {
     private long id;
     private String cityCode;
     private String cityName;
-    private String countryName;
+    private String countryCode;
+    private String cityNum;
 
-    public String getCountryName() {
-        return countryName;
+    public String getCityNum() {
+        return cityNum;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCityNum(String cityNum) {
+        this.cityNum = cityNum;
     }
+
     public String getCityName() {
         return cityName;
     }
@@ -27,6 +29,15 @@ public class City {
     public long getId() {
         return id;
     }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
     public void setId(long id) {
         this.id = id;
     }

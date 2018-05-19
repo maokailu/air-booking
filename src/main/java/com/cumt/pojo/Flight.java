@@ -20,6 +20,43 @@ public class Flight implements Serializable {
     private int businessClassCount;
     private int economyClassCount;
     private BigDecimal voyage;
+    private String departAirportName;
+    private String arriveAirportName;
+    private BigDecimal ticketPrice;
+    private BigDecimal airportTax;
+
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public BigDecimal getAirportTax() {
+        return airportTax;
+    }
+
+    public void setAirportTax(BigDecimal airportTax) {
+        this.airportTax = airportTax;
+    }
+
+    public String getDepartAirportName() {
+        return departAirportName;
+    }
+
+    public void setDepartAirportName(String departAirportName) {
+        this.departAirportName = departAirportName;
+    }
+
+    public String getArriveAirportName() {
+        return arriveAirportName;
+    }
+
+    public void setArriveAirportName(String arriveAirportName) {
+        this.arriveAirportName = arriveAirportName;
+    }
 
     public String getFlightId() {
         return flightId;

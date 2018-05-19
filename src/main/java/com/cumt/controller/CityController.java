@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +33,25 @@ public class CityController {
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<City> citys = cityService.getHotCitys();
         Map<String, ArrayList> hotDestination = new HashMap<String, ArrayList>();
-        Map<String, ArrayList> countrys = new HashMap<String, ArrayList>();
+        Map<String, ArrayList> citysGroupByCountry = new HashMap<String, ArrayList>();
         for (City city : citys) {
-            if(countrys.get(city.getCountryName()) != null){
-                countrys.get(city.getCountryName()).add(city);
+            if(citysGroupByCountry.get(city.getCountryCode()) != null){
+                citysGroupByCountry.get(city.getCountryCode()).add(city);
             } else {
                 ArrayList list = new ArrayList<>();
                 list.add(city);
-                countrys.put(city.getCountryName(), list);
+                citysGroupByCountry.put(city.getCountryCode(), list);
             }
         }
-        return JSONArray.toJSONString(countrys);
+        System.out.print(citysGroupByCountry);
+        return JSONArray.toJSONString(citysGroupByCountry);
+    }
+    @RequestMapping("getCurrentCityByCityNum")
+    @ResponseBody
+    public City getCurrentCityByCityNum(@RequestParam(name="cityNum") String cityNum, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        City city = cityService.getCurrentCityByCityNum(cityNum);
+        return city;
     }
 }
