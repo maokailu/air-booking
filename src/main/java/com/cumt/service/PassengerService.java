@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface PassengerService {
     List<Passenger> getPassengersByUserId(int userId);
+    int addPassenger(Passenger passenger);
 }

@@ -10,8 +10,22 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="ownership" jdbcType="VARCHAR" property="ownership" />
         <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="card_number" jdbcType="VARCHAR" property="cardNumber" />
+        <result column="birthday" jdbcType="DATE" property="birthday" />
+        <result column="gender" jdbcType="INTEGER" property="gender" />
     </resultMap>
     <select id="getPassengersByUserId" resultMap="BaseResultMap">
           select * from `passenger` INNER JOIN `user` on `passenger`.user_id = `user`.user_id where `user`.user_id = 0
     </select>
+
+    <insert id="addPassenger">
+        insert into `passenger`(passenger_id, name, ownership, user_id, card_number, birthday, gender)
+        values (#{passenger.passengerId},
+        #{passenger.name},
+        #{passenger.ownership},
+        #{passenger.userId},
+        #{passenger.cardNumber},
+        #{passenger.birthday},
+        #{passenger.gender})
+    </insert>
 </mapper>

@@ -57,17 +57,17 @@
         update flight
         <set>
             <choose>
-                <when test="flightSearch.classType == 0">
+                <when test="classType == 0">
                     flight.first_class_count = flight.first_class_count - 1
                 </when>
-                <when test="flightSearch.classType == 1">
+                <when test="classType == 1">
                     flight.business_class_count = flight.business_class_count - 1
                 </when>
                 <otherwise>
                     flight.economy_class_count = flight.economy_class_count - 1
                 </otherwise>
             </choose>
-            where flight_id = #{flightSearch.flightId}
+            where flight_id = #{flightId}
         </set>
 </update>
 

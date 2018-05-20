@@ -19,6 +19,9 @@ import java.util.List;
 public class PassengerServiceImpl implements PassengerService {
     @Autowired
     PassengerMapper passengerMapper;
+    public int addPassenger(Passenger passenger){
+        return passengerMapper.addPassenger(passenger);
+    };
     public List<Passenger> getPassengersByUserId(int userId){
         return passengerMapper.getPassengersByUserId(userId);
     };

@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface PassengerMapper {
     List<Passenger> getPassengersByUserId(@Param("userId") int userId);
+    int addPassenger(@Param("passenger")Passenger passenger);
 }

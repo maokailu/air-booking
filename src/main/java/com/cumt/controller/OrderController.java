@@ -39,13 +39,17 @@ public class OrderController {
     public String createOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
-
+        //随机产生订单号
         String orderId = "6";
+        int orderState = 1;
         Order order = new Order();
         order.setOrderId(orderId);
         order.setUserId(orderInfo.getOrder().getUserId());
         order.setContactName(orderInfo.getOrder().getContactName());
-        order.setOrderState(orderInfo.getOrder().getOrderState());
+        order.setOrderState(orderState);
+        order.setCellphone(orderInfo.getOrder().getCellphone());
+        order.setEmail(orderInfo.getOrder().getEmail());
+        order.setOrderDate(orderInfo.getOrder().getOrderDate());
         int id = orderService.addOrder(order);
         if(id!=0){
             List<Passenger> passengers = new ArrayList<Passenger>();
@@ -67,7 +71,7 @@ public class OrderController {
         System.out.print(orderInfo);
 
         Map<String,String> result=new HashMap<String, String>();
-        result.put("result", "恭喜您，预定成功！以下是您的订单信息");
+        result.put("result", "恭喜您，机票预定成功！");
         return JSON.toJSONString(result);
     }
 
