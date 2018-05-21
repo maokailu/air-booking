@@ -22,6 +22,25 @@ public class Flight implements Serializable {
     private BigDecimal voyage;
     private String departAirportName;
     private String arriveAirportName;
+    private String departCityName;
+    private String arriveCityName;
+
+    public String getDepartCityName() {
+        return departCityName;
+    }
+
+    public void setDepartCityName(String departCityName) {
+        this.departCityName = departCityName;
+    }
+
+    public String getArriveCityName() {
+        return arriveCityName;
+    }
+
+    public void setArriveCityName(String arriveCityName) {
+        this.arriveCityName = arriveCityName;
+    }
+
     private BigDecimal ticketPrice;
     private BigDecimal airportTax;
 

@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <result column="flight_id" jdbcType="CHAR" property="flightId" />
             <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
             <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
+            <result column="depart_city_name" jdbcType="VARCHAR" property="departCityName" />
+            <result column="arrive_city_name" jdbcType="VARCHAR" property="arriveCityName" />
             <result column="depart_time" jdbcType="TIMESTAMP" property="departTime" />
             <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
         </collection>
@@ -28,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <select id="getOrdersByUserId" resultMap="BaseResultMap">
-        select flight.flight_id, flight.depart_airport_name,flight.arrive_airport_name,
+        select flight.depart_city_name, flight.arrive_city_name, flight.flight_id, flight.depart_airport_name,flight.arrive_airport_name,
         flight.depart_time, flight.return_time,
         passenger.name,cabin_class.cabin_class_name,ticket.ticket_id
         from `order` INNER JOIN order_item
