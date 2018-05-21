@@ -13,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,5 +85,14 @@ public class OrderController {
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
 
         return JSON.toJSONString("");
+    }
+
+    @RequestMapping("getOrdersByUserId")
+    @ResponseBody
+    public List<OrderInfo>  getOrdersByUserId(@RequestParam(name="userId")String userId, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        List<OrderInfo>  orders = orderService.getOrdersByUserId(userId);
+        return orders;
     }
 }

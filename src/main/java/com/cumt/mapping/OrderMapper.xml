@@ -4,14 +4,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cumt.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.cumt.pojo.Order">
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.OrderInfo">
         <id column="id" jdbcType="BIGINT" property="id" />
+        <collection property="passenger" ofType="com.cumt.pojo.Passenger">
+            <result column="name" jdbcType="VARCHAR" property="name" />
+        </collection>
+        <collection property="ticket" ofType="com.cumt.pojo.Ticket">
+            <result column="ticket_id" jdbcType="VARCHAR" property="ticketId" />
+        </collection>
+        <collection property="flight" ofType="com.cumt.pojo.Flight">
+            <result column="flight_id" jdbcType="CHAR" property="flightId" />
+            <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
+            <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
+            <result column="depart_time" jdbcType="TIMESTAMP" property="departTime" />
+            <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
+        </collection>
+        <collection property="cabinClass" ofType="com.cumt.pojo.CabinClass">
+            <result column="cabin_class_name" jdbcType="VARCHAR" property="cabinClassName" />
+        </collection>
     </resultMap>
     <insert id="addOrder" parameterType="Order" >
         insert into `order` (order_id, user_id, contact_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{contactName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{cellphone}, #{email}, #{zipCode})
     </insert>
 
-    <select id="getOrderDetail">
-        select order_id, flight.*, passenger.* from `order` inner JOIN  `order_item` on  `order`.order_id = `order_item`.order_id where `order`.order_id = #{orderId}
+    <select id="getOrdersByUserId" resultMap="BaseResultMap">
+        select flight.flight_id, flight.depart_airport_name,flight.arrive_airport_name,
+        flight.depart_time, flight.return_time,
+        passenger.name,cabin_class.cabin_class_name,ticket.ticket_id
+        from `order` INNER JOIN order_item
+        on `order`.order_id = order_item.order_id
+        INNER JOIN ticket
+        on order_item.ticket_id=ticket.ticket_id
+        inner join flight
+        on ticket.flight_id = flight.flight_id
+        INNER JOIN passenger
+        on order_item.passenger_id = passenger.passenger_id
+        INNER JOIN cabin_class
+        on cabin_class.cabin_class_id = ticket.cabin_class_id
+        where `order`.user_id = #{userId}
     </select>
 </mapper>

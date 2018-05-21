@@ -9,6 +9,8 @@
     </resultMap>
     <insert id="addOrderItem">
         insert into `order_item`(order_item_id, order_id, ticket_id, passenger_id)
-        select #{orderItem.orderItemId}, #{orderItem.orderId}, ticket.ticket_id, #{orderItem.passengerId} from ticket INNER JOIN flight on ticket.flight_id = flight.flight_id where flight.first_class_count > 0 and ticket.flight_id = #{flightId}
+        select #{orderItem.orderItemId}, #{orderItem.orderId}, ticket.ticket_id, #{orderItem.passengerId}
+        from ticket INNER JOIN flight on ticket.flight_id = flight.flight_id
+        where flight.first_class_count > 0 and ticket.flight_id = #{flightId}
     </insert>
 </mapper>

@@ -3,16 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cumt.mapper.CityMapper">
-    <resultMap id="BaseResultMap" type="com.cumt.pojo.City">
+<mapper namespace="com.cumt.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.cumt.pojo.User">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="INTEGER" property="gender" />
+        <result column="card_number" jdbcType="VARCHAR" property="idCardNumber" />
+        <result column="birthday" jdbcType="DATE" property="birthday" />
     </resultMap>
-    <select id="getUserId" resultMap="BaseResultMap" resultType="User">
-        select user_id from `user` where user_id = #{userId}
+    <select id="getUserByUserId" resultMap="BaseResultMap">
+        select * from `user` where user_id = #{userId}
     </select>
-    <select id="getPassword" resultMap="BaseResultMap" resultType="User">
+    <select id="getPassword" resultMap="BaseResultMap">
         select password from `user` where user_id = #{userId}
     </select>
 </mapper>

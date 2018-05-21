@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +31,25 @@ public class UserController {
 //    登陆功能
     @RequestMapping("login")
     @ResponseBody
-    public String login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+    public String login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
         String result = "";
-        if(userService.getUserId(user.getUserId())!=null){
-            if(user.getPassword() == userService.getPassword(user.getUserId())){
+        User findUser = userService.getUserByUserId(user.getUserId());
+        String userId = "";
+        if(findUser!=null){
+            userId = findUser.getUserId();
+        }
+        String password = user.getPassword();
+        if(!userId.equals("")){
+            if(findUser.getPassword().equals(password)){
+                String userIdEncode = "";
+                userIdEncode = URLEncoder.encode(userId, "UTF-8");
+                Cookie cookie = new Cookie("userId", userIdEncode);
+                cookie.setMaxAge(30 * 60);
+                cookie.setPath("/");
+                System.out.println("已添加===============");
+                response.addCookie(cookie);
                 result = "登陆成功！";
             }else{
                 result = "密码错误！";
@@ -41,7 +57,7 @@ public class UserController {
         }else{
             result = "账户不存在！";
         }
-        return JSON.toJSONString("");
+        return JSON.toJSONString(result);
     }
 
 }
