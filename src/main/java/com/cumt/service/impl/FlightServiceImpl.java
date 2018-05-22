@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 public class FlightServiceImpl  implements FlightService {
     @Autowired
     FlightMapper flightMapper;
-    public List<Flight> getFlightsBySearch(FlightSearch flightSearch){
-        return flightMapper.getFlightsBySearch(flightSearch);
+    public List<Flight> getFlightsBySearch(FlightSearch flightSearch, int start, int size){
+        return flightMapper.getFlightsBySearch(flightSearch, start, size);
     };
     public int minusClassCount(String flightId, int classType){
         return flightMapper.minusClassCount(flightId,classType);

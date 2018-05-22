@@ -31,14 +31,15 @@ public class FlightController {
     FlightService flightService;
     @RequestMapping("getFlights")
     @ResponseBody
-    public List<Flight> getFlights(@RequestBody FlightSearch flightSearch, HttpServletRequest request, HttpServletResponse response) {
+    public List<Flight> getFlights(@RequestBody FlightSearch flightSearch,@RequestParam(name="start")int start,@RequestParam(name="size")int size, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
 //        Cookie[] cookies = request.getCookies();
 //        for(Cookie cookie : cookies){
 //            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
 //        }
-        List<Flight> flights = flightService.getFlightsBySearch(flightSearch);
+        System.out.println(size+ start);
+        List<Flight> flights = flightService.getFlightsBySearch(flightSearch, size * start, size);
         return flights;
     }
 

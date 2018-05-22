@@ -65,6 +65,7 @@
                 and flight.economy_class_count >= #{flightSearch.passenger}
             </otherwise>
         </choose>
+        limit ${start},${size}
     </select>
     <select id="getFlightsByAirport" resultMap="BaseResultMap">
        select * from `flight`
