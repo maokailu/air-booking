@@ -38,34 +38,7 @@ public class FlightController {
 //        for(Cookie cookie : cookies){
 //            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
 //        }
-//        Cookie cookie = new Cookie("sid", "mmm");
-//        cookie.setMaxAge(30 * 60);
-//        cookie.setPath("/");
-//        System.out.println("已添加===============");
-//        response.addCookie(cookie);
-//        int flightType = 0;
-//        String departCityCode = flightSearch.getDepartCityCode();
-//        String arriveCityCode = flightSearch.getArriveCityCode();
-//        String departAirportCode = flightSearch.getArriveAirportCode();
-//        String arriveAirportCode = flightSearch.getArriveAirportCode();
-//        Timestamp departTime = new Timestamp(System.currentTimeMillis());
-//        Timestamp returnTime = new Timestamp(System.currentTimeMillis());
-//        int classType = flightSearch.getClassType();
-//        int passenger = flightSearch.getPassenger();
-//        if(flightSearch.getFirstClassCount() != 0){
-//            classType = 0;
-//            passenger = flightSearch.getFirstClassCount();
-//        } else if(flightSearch.getBusinessClassCount() != 0){
-//            classType = 1;
-//            passenger = flightSearch.getBusinessClassCount();
-//        } else{
-//            classType = 2;
-//            passenger = flightSearch.getEconomyClassCount();
-//        }
-
-//        List<Flight> flights = flightService.getFlightsBySearch(flightType, departCityCode,arriveCityCode, departAirportCode,arriveAirportCode, departTime, returnTime, classType, passenger);
         List<Flight> flights = flightService.getFlightsBySearch(flightSearch);
-        System.out.print(flights);
         return flights;
     }
 

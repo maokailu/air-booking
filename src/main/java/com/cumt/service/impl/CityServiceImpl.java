@@ -2,6 +2,7 @@ package com.cumt.service.impl;
 
 import com.cumt.mapper.CityMapper;
 import com.cumt.mapper.FlightMapper;
+import com.cumt.pojo.Airport;
 import com.cumt.pojo.City;
 import com.cumt.pojo.Flight;
 import com.cumt.service.CategoryService;
@@ -24,5 +25,9 @@ public class CityServiceImpl implements CityService {
     };
     public City getCurrentCityByCityNum(String cityNum){
         return cityMapper.getCurrentCityByCityNum(cityNum);
+    };
+
+    public List<City> getAirportsGroupByCity(String text){
+        return cityMapper.getAirportsGroupByCity(text);
     };
 }

@@ -20,5 +20,8 @@ public class FlightServiceImpl  implements FlightService {
     public int minusClassCount(String flightId, int classType){
         return flightMapper.minusClassCount(flightId,classType);
     };
+    public List<Flight> getFlightsByAirport(FlightSearch flightSearch){
+        return flightMapper.getFlightsByAirport(flightSearch);
+    };
 
 }

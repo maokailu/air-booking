@@ -54,4 +54,12 @@ public class CityController {
         City city = cityService.getCurrentCityByCityNum(cityNum);
         return city;
     }
+    @RequestMapping("getCitys")
+    @ResponseBody
+    public List<City> getCitys(@RequestParam(name="text")String text, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        List<City> citys = cityService.getAirportsGroupByCity(text);
+        return citys;
+    }
 }

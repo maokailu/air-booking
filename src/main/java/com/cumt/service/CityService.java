@@ -12,4 +12,5 @@ import java.util.List;
 public interface CityService {
     public List<City> getHotCitys();
     public City getCurrentCityByCityNum(String cityNum);
+    public List<City> getAirportsGroupByCity(String text);
 }

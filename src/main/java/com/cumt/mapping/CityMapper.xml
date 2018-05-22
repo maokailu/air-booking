@@ -10,10 +10,30 @@
         <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
         <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
     </resultMap>
+
+    <resultMap id="GroupResultMap" type="com.cumt.pojo.City">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+        <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+        <collection property="airports" ofType="com.cumt.pojo.Airport">
+            <result column="airport_code" jdbcType="VARCHAR" property="airportCode" />
+            <result column="airport_name" jdbcType="VARCHAR" property="airportName" />
+        </collection>
+    </resultMap>
     <select id="getHotCitys" resultMap="BaseResultMap" resultType="City">
           select city.id, city.country_code, city.city_code, city.city_name from city INNER JOIN hot_city INNER JOIN country on city.city_code = hot_city.city_code and city.country_code=country.country_code
     </select>
     <select id="getCurrentCityByCityNum" resultMap="BaseResultMap">
         select city.city_code, city.city_name from city where city_num = #{cityNum}
+    </select>
+    <select id="getAirportsGroupByCity" resultMap="GroupResultMap">
+        select city.city_code, city.city_name, airport.airport_code,
+        airport.airport_name
+        from `city` inner join `airport`
+        on city.city_code = airport.city_code
+        where city.city_code like '%${text}%'
+        or airport.airport_code like '%${text}%'
+        or city.city_name like '%${text}%'
+        or airport.airport_name like '%${text}%'
     </select>
 </mapper>

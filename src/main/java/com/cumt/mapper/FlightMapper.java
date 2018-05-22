@@ -9,6 +9,7 @@ import com.cumt.pojo.FlightSearch;
 import org.apache.ibatis.annotations.Param;
 
 public interface FlightMapper {
+    List<Flight> getFlightsByAirport(@Param("flightSearch")FlightSearch flightSearch);
 
     List<Flight> getFlightsBySearch(@Param("flightSearch")FlightSearch flightSearch);
 //    List<Flight> getFlightsBySearch(@Param("flightType") int flightType,@Param("departCityCode") String departCityCode,@Param("arriveCityCode") String arriveCityCode,@Param("departAirportCode") String departAirportCode,@Param("arriveAirportCode") String arriveAirportCode,@Param("departTime") Timestamp departTime,@Param("arriveTime") Timestamp arriveTime,@Param("classType") int classType,@Param("passenger") int passenger);

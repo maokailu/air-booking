@@ -6,6 +6,29 @@ package com.cumt.pojo;
 public class FlightSearch extends Flight {
     private String departCityCode;
     private String arriveCityCode;
+    private String departAirportCode;
+    private String arriveAirportCode;
+
+    @Override
+    public String getDepartAirportCode() {
+        return departAirportCode;
+    }
+
+    @Override
+    public void setDepartAirportCode(String departAirportCode) {
+        this.departAirportCode = departAirportCode;
+    }
+
+    @Override
+    public String getArriveAirportCode() {
+        return arriveAirportCode;
+    }
+
+    @Override
+    public void setArriveAirportCode(String arriveAirportCode) {
+        this.arriveAirportCode = arriveAirportCode;
+    }
+
     private int classType;
 
     public String getDepartCityCode() {

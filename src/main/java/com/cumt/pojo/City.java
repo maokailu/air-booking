@@ -1,6 +1,7 @@
 package com.cumt.pojo;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018-04-30.
@@ -8,9 +9,19 @@ import java.math.BigInteger;
 public class City {
     private long id;
     private String cityCode;
+
+    public List<Airport> getAirports() {
+        return airports;
+    }
+
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
+    }
+
     private String cityName;
     private String countryCode;
     private String cityNum;
+    private List<Airport> airports;
 
     public String getCityNum() {
         return cityNum;

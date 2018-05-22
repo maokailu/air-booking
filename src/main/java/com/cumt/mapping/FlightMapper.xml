@@ -23,16 +23,30 @@
         <result column="airport_tax" jdbcType="DECIMAL" property="airportTax" />
     </resultMap>
     <select id="getFlightsBySearch" resultMap="BaseResultMap">
---         select *, departAirportName, airport.airport_name as arriveAirportName
---         from (SELECT airport.airport_name as departAirportName,flight.arrive_airport_code
---         FROM `flight` inner join `airport` on flight.depart_airport_code = airport.airport_code) as a1
---         INNER JOIN `airport` on airport.airport_code = flight.arrive_airport_code
         select flight.* from `flight`
         <where>
-            flight.depart_airport_code in
-            (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{flightSearch.departCityCode})
-            and flight.arrive_airport_code in
-            (select airport.airport_code from `city` INNER JOIN `airport` on city.city_code = airport.city_code where city.city_code = #{flightSearch.arriveCityCode})
+            <choose>
+                <when test="flightSearch.departAirportCode=='ALL'">
+                    flight.depart_airport_code in
+                    (select airport.airport_code from `city` INNER JOIN `airport`
+                    on city.city_code = airport.city_code
+                    where city.city_code = #{flightSearch.departCityCode})
+                </when>
+                <otherwise>
+                    flight.depart_airport_code = #{flightSearch.departAirportCode}
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="flightSearch.arriveAirportCode=='ALL'">
+                    and flight.arrive_airport_code in
+                    (select airport.airport_code from `city` INNER JOIN `airport`
+                    on city.city_code = airport.city_code
+                    where city.city_code = #{flightSearch.arriveCityCode})
+                </when>
+                <otherwise>
+                    and flight.arrive_airport_code = #{flightSearch.arriveAirportCode}
+                </otherwise>
+            </choose>
             <if test="flightSearch.departTime!=null">
                 and flight.depart_time >= #{flightSearch.departTime}
             </if>
@@ -52,7 +66,11 @@
             </otherwise>
         </choose>
     </select>
-
+    <select id="getFlightsByAirport" resultMap="BaseResultMap">
+       select * from `flight`
+        where flight.depart_airport_code = #{flightSearch.arriveAirportCode}
+        and flight.arrive_airport_code = #{flightSearch.arriveAirportCode}
+    </select>
     <update id="minusClassCount" >
         update flight
         <set>
