@@ -66,4 +66,15 @@ public class UserController {
         List<User> users = userService.getUsers(user);
         return users;
     }
+    //    新增用户
+    @RequestMapping("addUser")
+    @ResponseBody
+    public String addUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        int num = userService.addUser(user);
+        String result = "操作成功";
+        if(num == 0) {
+            result = "操作失败，请重试！";
+        }
+        return result;
+    }
 }

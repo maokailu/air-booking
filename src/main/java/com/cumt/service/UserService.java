@@ -1,6 +1,7 @@
 package com.cumt.service;
 
 import com.cumt.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface UserService {
     public User getUserByUserId(String userId);
     public String getPassword(String userId);
     public List<User> getUsers(User user);
+    public int addUser(User user);
 }

@@ -22,4 +22,8 @@
     <select id="getUsers" resultMap="BaseResultMap">
         select * from `user`
     </select>
+    <insert id="addUser">
+        insert into `user`(user_id, password, gender) VALUES
+        (#{user.userId}, #{user.password}, #{user.gender})
+    </insert>
 </mapper>

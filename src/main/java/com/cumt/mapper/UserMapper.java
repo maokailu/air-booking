@@ -12,4 +12,5 @@ public interface UserMapper {
     public User getUserByUserId(@Param("userId")String userId);
     public String getPassword(@Param("userId")String userId);
     public List<User> getUsers(@Param("user")User user);
+    public int addUser(@Param("user")User user);
 }
