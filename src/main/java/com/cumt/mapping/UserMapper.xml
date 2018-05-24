@@ -19,4 +19,7 @@
     <select id="getPassword" resultMap="BaseResultMap">
         select password from `user` where user_id = #{userId}
     </select>
+    <select id="getUsers" resultMap="BaseResultMap">
+        select * from `user`
+    </select>
 </mapper>

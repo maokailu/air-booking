@@ -7,6 +7,8 @@ import com.cumt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018-05-21.
  */
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
     }
     public String getPassword(String userId){
         return userMapper.getPassword(userId);
+    }
+    public List<User> getUsers(User user){
+        return userMapper.getUsers(user);
     }
 
 }

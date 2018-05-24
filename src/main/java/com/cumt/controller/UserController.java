@@ -59,5 +59,11 @@ public class UserController {
         }
         return JSON.toJSONString(result);
     }
-
+    //    查询用户
+    @RequestMapping("getUsers")
+    @ResponseBody
+    public List<User> getUsers(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        List<User> users = userService.getUsers(user);
+        return users;
+    }
 }

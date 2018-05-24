@@ -29,8 +29,6 @@ public class CityController {
     @RequestMapping("getHotDestinations")
     @ResponseBody
     public String getHotDestinations(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<City> citys = cityService.getHotCitys();
         Map<String, ArrayList> hotDestination = new HashMap<String, ArrayList>();
         Map<String, ArrayList> citysGroupByCountry = new HashMap<String, ArrayList>();
