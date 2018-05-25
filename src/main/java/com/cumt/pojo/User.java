@@ -9,10 +9,26 @@ public class User {
     private long id;
     private String userId;
     private String userName;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     private String password;
-    private int gender;
+    private String gender;
+    private String phone;
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     private String idCardNumber;
-    private Date birthday;
+    private String birthday;
+
 
     public long getId() {
         return id;
@@ -46,13 +62,6 @@ public class User {
         this.password = password;
     }
 
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
 
     public String getIdCardNumber() {
         return idCardNumber;
@@ -62,11 +71,15 @@ public class User {
         this.idCardNumber = idCardNumber;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public String getGender() {
+        return gender;
+    }
+
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }

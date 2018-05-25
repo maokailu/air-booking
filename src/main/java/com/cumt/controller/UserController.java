@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
@@ -15,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2018-05-13.
@@ -69,12 +67,33 @@ public class UserController {
     //    新增用户
     @RequestMapping("addUser")
     @ResponseBody
-    public String addUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public int addUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+//        时间戳
+        String userId = String.valueOf(Calendar.getInstance().getTimeInMillis());
+        User userObj = new User();
+        user.setUserId(userId);
         int num = userService.addUser(user);
-        String result = "操作成功";
-        if(num == 0) {
-            result = "操作失败，请重试！";
-        }
+        return num;
+    }
+    //    更新用户
+    @RequestMapping("updateUser")
+    @ResponseBody
+    public int updateUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        int result = userService.updateUser(user);
         return result;
+    }
+    //    删除用户
+    @RequestMapping("deleteUser")
+    @ResponseBody
+    public int deleteUser(@RequestParam(name="userId")String userId, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        int result = userService.deleteUser(userId);
+        return result;
+    }
+    //    搜索用户
+    @RequestMapping("getUsersBySearch")
+    @ResponseBody
+    public List<User> getUsersBySearch(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        List<User> users = userService.getUsersBySearch(user);
+        return users;
     }
 }

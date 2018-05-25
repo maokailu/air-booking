@@ -9,9 +9,10 @@
         <result column="user_id" jdbcType="VARCHAR" property="userId" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="gender" jdbcType="INTEGER" property="gender" />
-        <result column="card_number" jdbcType="VARCHAR" property="idCardNumber" />
-        <result column="birthday" jdbcType="DATE" property="birthday" />
+        <result column="gender" jdbcType="CHAR" property="gender"/>
+        <result column="id_card_number" jdbcType="VARCHAR" property="idCardNumber" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
     </resultMap>
     <select id="getUserByUserId" resultMap="BaseResultMap">
         select * from `user` where user_id = #{userId}
@@ -20,10 +21,42 @@
         select password from `user` where user_id = #{userId}
     </select>
     <select id="getUsers" resultMap="BaseResultMap">
-        select * from `user`
+        select user_id, user_name, password, phone, gender, id_card_number, DATE_FORMAT(birthday,'%Y-%m-%d') as birthday from `user`
     </select>
     <insert id="addUser">
-        insert into `user`(user_id, password, gender) VALUES
-        (#{user.userId}, #{user.password}, #{user.gender})
+        insert into `user`(user_id, password, gender, user_name, birthday, phone, id_card_number)
+        values (#{user.userId}, #{user.password}, #{user.gender}, #{user.userName}, #{user.birthday}, #{user.phone}, #{user.idCardNumber})
     </insert>
+    <update id="updateUser" >
+        update `user` set password = #{user.password}, gender = #{user.gender},
+        user_name = #{user.userName}, phone=#{user.phone},id_card_number=#{user.idCardNumber},
+        birthday = #{user.birthday}
+        where user_id = #{user.userId}
+    </update>
+    <delete id="dateleUser">
+        delete from `user` where user_id= #{userId}
+    </delete>
+    <select id="getUsersBySearch" resultMap="BaseResultMap">
+        select user_id, user_name, password, phone, gender, id_card_number, DATE_FORMAT(birthday,'%Y-%m-%d') as birthday from `user`
+        <where>
+            <if test="user.userId!=null">
+                user.user_id LIKE '%${user.userId}%'
+            </if>
+            <if test="user.userName!=null">
+                and user.user_name LIKE '%${user.userName}%'
+            </if>
+            <if test="user.gender!=null">
+                and user.gender LIKE '%${user.gender}%'
+            </if>
+            <if test="user.birthday!=null">
+                and user.birthday = #{user.birthday}
+            </if>
+            <if test="user.gender!=null">
+                and user.phone LIKE '%${user.phone}%'
+            </if>
+            <if test="user.gender!=null">
+                and user.id_card_number LIKE '%${user.idCardNumber}%'
+            </if>
+        </where>
+    </select>
 </mapper>

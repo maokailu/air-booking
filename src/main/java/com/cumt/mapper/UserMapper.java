@@ -13,4 +13,7 @@ public interface UserMapper {
     public String getPassword(@Param("userId")String userId);
     public List<User> getUsers(@Param("user")User user);
     public int addUser(@Param("user")User user);
+    public int updateUser(@Param("user")User user);
+    public int dateleUser(@Param("userId")String userId);
+    public List<User> getUsersBySearch(@Param("user")User user);
 }

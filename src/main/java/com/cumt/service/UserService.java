@@ -13,4 +13,7 @@ public interface UserService {
     public String getPassword(String userId);
     public List<User> getUsers(User user);
     public int addUser(User user);
+    public int updateUser(User user);
+    public int deleteUser(String userId);
+    public List<User> getUsersBySearch(User user);
 }
