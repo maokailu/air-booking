@@ -1,5 +1,6 @@
 package com.cumt.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -27,7 +28,7 @@ public class User {
     }
 
     private String idCardNumber;
-    private String birthday;
+    private Timestamp birthday;
 
 
     public long getId() {
@@ -71,7 +72,7 @@ public class User {
         this.idCardNumber = idCardNumber;
     }
 
-    public String getBirthday() {
+    public Timestamp getBirthday() {
         return birthday;
     }
 
@@ -79,7 +80,7 @@ public class User {
         return gender;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Timestamp birthday) {
         this.birthday = birthday;
     }
 }

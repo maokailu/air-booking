@@ -88,30 +88,6 @@
             </choose>
             where flight_id = #{flightId}
         </set>
-</update>
-
-    <!--<sql id="base_select">-->
-        <!--id,city_id-->
-    <!--</sql>-->
-    <!--<sql id="base_from">-->
-        <!--FROM city-->
-    <!--</sql>-->
-
-    <!--<sql id="base_where">-->
-        <!--<where>-->
-            <!--<if test="city_id!=null">-->
-                <!--AND city_id = #{cityId, javaType=INTEGER}-->
-            <!--</if>-->
-            <!--<choose>-->
-
-            <!--</choose>-->
-        <!--</where>-->
-    <!--</sql>-->
-
-    <!--<select id="test" parameterMap="map" resultMap="BaseResultMap">-->
-        <!--SELECT <include refid="base_select"/>-->
-        <!--<include refid="base_from"/>-->
-        <!--<include refid="base_where"/>-->
-    <!--</select>-->
+    </update>
 </mapper>
 

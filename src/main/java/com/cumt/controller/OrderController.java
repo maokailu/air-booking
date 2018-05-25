@@ -1,10 +1,7 @@
 package com.cumt.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.cumt.pojo.Order;
-import com.cumt.pojo.OrderInfo;
-import com.cumt.pojo.OrderItem;
-import com.cumt.pojo.Passenger;
+import com.cumt.pojo.*;
 import com.cumt.service.FlightService;
 import com.cumt.service.OrderItemService;
 import com.cumt.service.OrderService;
@@ -93,6 +90,15 @@ public class OrderController {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
         response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<OrderInfo>  orders = orderService.getOrdersByUserId(userId);
+        return orders;
+    }
+
+    @RequestMapping("getOrdersBySearch")
+    @ResponseBody
+    public List<OrderInfo>  getOrdersBySearch(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        List<OrderInfo>  orders = orderService.getOrdersBySearch(user);
         return orders;
     }
 }

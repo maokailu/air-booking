@@ -43,6 +43,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         on order_item.passenger_id = passenger.passenger_id
         INNER JOIN cabin_class
         on cabin_class.cabin_class_id = ticket.cabin_class_id
-        where `order`.user_id = #{userId}
+        <where>
+            <if test="user.userId!=null">
+                user.user_id LIKE '%${user.userId}%'
+            </if>
+        </where>
+    </select>
+    <select id="getOrdersBySearch" resultMap="BaseResultMap">
+        select flight.depart_city_name, flight.arrive_city_name, flight.flight_id, flight.depart_airport_name,flight.arrive_airport_name,
+        flight.depart_time, flight.return_time,
+        passenger.name,cabin_class.cabin_class_name,ticket.ticket_id
+        from `order` INNER JOIN order_item
+        on `order`.order_id = order_item.order_id
+        INNER JOIN ticket
+        on order_item.ticket_id=ticket.ticket_id
+        inner join flight
+        on ticket.flight_id = flight.flight_id
+        INNER JOIN passenger
+        on order_item.passenger_id = passenger.passenger_id
+        INNER JOIN cabin_class
+        on cabin_class.cabin_class_id = ticket.cabin_class_id
+        <where>
+            <if test="user.userId!=null">
+                user.user_id LIKE '%${user.userId}%'
+            </if>
+        </where>
     </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.cumt.service;
 
 import com.cumt.pojo.Order;
 import com.cumt.pojo.OrderInfo;
+import com.cumt.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,4 +13,5 @@ import java.util.List;
 public interface OrderService {
     public int addOrder(Order order);
     public List<OrderInfo> getOrdersByUserId(String userId);
+    public List<OrderInfo> getOrdersBySearch(User user);
 }

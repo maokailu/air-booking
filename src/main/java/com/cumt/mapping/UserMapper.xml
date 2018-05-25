@@ -12,7 +12,7 @@
         <result column="gender" jdbcType="CHAR" property="gender"/>
         <result column="id_card_number" jdbcType="VARCHAR" property="idCardNumber" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
     </resultMap>
     <select id="getUserByUserId" resultMap="BaseResultMap">
         select * from `user` where user_id = #{userId}
@@ -37,7 +37,7 @@
         delete from `user` where user_id= #{userId}
     </delete>
     <select id="getUsersBySearch" resultMap="BaseResultMap">
-        select user_id, user_name, password, phone, gender, id_card_number, DATE_FORMAT(birthday,'%Y-%m-%d') as birthday from `user`
+        select user_id, user_name, password, phone, gender, id_card_number, birthday from `user`
         <where>
             <if test="user.userId!=null">
                 user.user_id LIKE '%${user.userId}%'
@@ -49,12 +49,12 @@
                 and user.gender LIKE '%${user.gender}%'
             </if>
             <if test="user.birthday!=null">
-                and user.birthday = #{user.birthday}
+                and user.birthday = DATE_FORMAT(#{user.birthday},'%Y-%m-%d')
             </if>
-            <if test="user.gender!=null">
+            <if test="user.phone!=null">
                 and user.phone LIKE '%${user.phone}%'
             </if>
-            <if test="user.gender!=null">
+            <if test="user.idCardNumber!=null">
                 and user.id_card_number LIKE '%${user.idCardNumber}%'
             </if>
         </where>

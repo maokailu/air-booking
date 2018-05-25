@@ -2,6 +2,7 @@ package com.cumt.service.impl;
 
 import com.cumt.mapper.TicketMapper;
 import com.cumt.mapper.UserMapper;
+import com.cumt.pojo.OrderInfo;
 import com.cumt.pojo.User;
 import com.cumt.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -36,6 +37,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.dateleUser(userId);
     }
     public List<User> getUsersBySearch(User user){
-        return userMapper.getUsersBySearch((user));
+        return userMapper.getUsersBySearch(user);
     }
 }
