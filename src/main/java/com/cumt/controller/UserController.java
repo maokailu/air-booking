@@ -30,8 +30,6 @@ public class UserController {
     @RequestMapping("login")
     @ResponseBody
     public String login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         String result = "";
         User findUser = userService.getUserByUserId(user.getUserId());
         String userId = "";

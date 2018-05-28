@@ -37,8 +37,6 @@ public class OrderController {
     @RequestMapping("createOrder")
     @ResponseBody
     public String createOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         //随机产生订单号
         String orderId = "6";
         int orderState = 1;
@@ -78,17 +76,12 @@ public class OrderController {
     @RequestMapping("getOrderDetail")
     @ResponseBody
     public String getOrderDetail(@RequestBody String orderId, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
-
         return JSON.toJSONString("");
     }
 
     @RequestMapping("getOrdersByUserId")
     @ResponseBody
     public List<OrderInfo>  getOrdersByUserId(@RequestParam(name="userId")String userId, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<OrderInfo>  orders = orderService.getOrdersByUserId(userId);
         return orders;
     }
@@ -96,24 +89,18 @@ public class OrderController {
     @RequestMapping("getOrdersBySearch")
     @ResponseBody
     public List<OrderInfo>  getOrdersBySearch(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<OrderInfo>  orders = orderService.getOrdersBySearch(user);
         return orders;
     }
     @RequestMapping("getOrders")
     @ResponseBody
     public List<OrderQuery>  getOrders(@RequestBody OrderQuery order, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<OrderQuery>  orders = orderService.getOrders(order);
         return orders;
     }
     @RequestMapping("getOrderNumByDate")
     @ResponseBody
     public List<OrderStat> getOrderNumByDate(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         List<OrderStat> orderStat = orderService.getOrderNumByDate();
         return orderStat;
     }

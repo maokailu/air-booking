@@ -32,8 +32,6 @@ public class FlightController {
     @RequestMapping("getFlights")
     @ResponseBody
     public List<Flight> getFlights(@RequestBody FlightSearch flightSearch,@RequestParam(name="start")int start,@RequestParam(name="size")int size, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
 //        Cookie[] cookies = request.getCookies();
 //        for(Cookie cookie : cookies){
 //            System.out.println("name:"+cookie.getName()+",value:"+ cookie.getValue());
@@ -46,8 +44,6 @@ public class FlightController {
     @RequestMapping(value ="getCurrentCity")
     @ResponseBody
     public String getCurrentCity(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET,OPTIONS");
         response.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
         response.setHeader("Set-Cookie", "uid=maokailu");
         City city = new City();
