@@ -69,4 +69,100 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
         </where>
     </select>
+
+    <resultMap id="OrderResultMap" type="com.cumt.pojo.OrderQuery">
+        <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="concact_name" jdbcType="VARCHAR" property="concactName" />
+        <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+        <result column="order_state" jdbcType="INTEGER" property="orderState" />
+        <result column="total_ticket_price" jdbcType="DECIMAL" property="totalTicketPrice" />
+        <result column="total_fuel_surcharge" jdbcType="DECIMAL" property="totalFuelSurcharge" />
+        <result column="total_airport_tax" jdbcType="DECIMAL" property="totalAirportTax" />
+        <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+        <collection property="user" ofType="com.cumt.pojo.User">
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        </collection>
+        <collection property="orderItems" javaType="ArrayList" ofType="com.cumt.pojo.OrderItemQuery">
+            <id column="order_item_id" jdbcType="VARCHAR" property="orderItemId" />
+            <result column="order_item_id" jdbcType="VARCHAR" property="orderItemId" />
+            <collection property="passenger" ofType="com.cumt.pojo.Passenger">
+                <result column="name" jdbcType="VARCHAR" property="name" />
+                <result column="cardNumber" jdbcType="VARCHAR" property="cardNumber" />
+            </collection>
+            <collection property="ticket" ofType="com.cumt.pojo.TicketQuery">
+                <result column="ticket_id" jdbcType="VARCHAR" property="ticketId" />
+                <result column="ticket_price" jdbcType="DECIMAL" property="ticketPrice" />
+                <result column="airport_tax" jdbcType="DECIMAL" property="airportTax" />
+                <result column="fuel_surcharge" jdbcType="DECIMAL" property="fuelCharge" />
+                <collection property="flight" ofType="com.cumt.pojo.Flight">
+                    <result column="flight_id" jdbcType="CHAR" property="flightId" />
+                    <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
+                    <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
+                    <result column="depart_city_name" jdbcType="VARCHAR" property="departCityName" />
+                    <result column="arrive_city_name" jdbcType="VARCHAR" property="arriveCityName" />
+                    <result column="depart_time" jdbcType="TIMESTAMP" property="departTime" />
+                    <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
+                </collection>
+                <collection property="cabinClass" ofType="com.cumt.pojo.CabinClass">
+                    <result column="cabin_class_name" jdbcType="VARCHAR" property="cabinClassName" />
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getOrders" resultMap="OrderResultMap">
+        select
+        `user`.user_name,
+        `user`.user_id,
+        order.order_id,order.contact_name,order.email,order.cellphone,order.order_date,order.order_state,order.total_ticket_price,
+        order.total_fuel_surcharge,order.total_airport_tax,order.total_price,
+        order_item.order_item_id,
+        flight.depart_city_name,
+        flight.arrive_city_name,
+        flight.flight_id,
+        flight.depart_airport_name,
+        flight.arrive_airport_name,
+        flight.depart_time,
+        flight.return_time,
+        passenger.name,passenger.card_number,
+        cabin_class.cabin_class_name,
+        ticket.ticket_id,ticket.ticket_price,ticket.fuel_surcharge,ticket.airport_tax
+        from `order` INNER JOIN order_item
+        on `order`.order_id = order_item.order_id
+        INNER JOIN ticket
+        on order_item.ticket_id=ticket.ticket_id
+        inner join flight
+        on ticket.flight_id = flight.flight_id
+        INNER JOIN passenger
+        on order_item.passenger_id = passenger.passenger_id
+        INNER JOIN cabin_class
+        on cabin_class.cabin_class_id = ticket.cabin_class_id
+        inner join `user`
+        on user.user_id = order.user_id
+        <where>
+            <if test="order !=null and order.user !=null and order.user.userId!=null">
+                user.user_id LIKE '%${order.user.userId}%'
+            </if>
+            <if test="order !=null and order.user !=null and order.user.userName!=null">
+                user.user_name LIKE '%${order.user.userName}%'
+            </if>
+            <if test="order !=null and order.orderDate!=null">
+                order.order_date = DATE_FORMAT(#{order.orderDate},'%Y-%m-%d')
+            </if>
+            <if test="order !=null and order.orderId!=null">
+                order.order_id LIKE '%${order.orderId}%'
+            </if>
+        </where>
+    </select>
+    <select id="getOrderNumByDate" resultMap="OrderStatResultMap">
+        select order_date,count(*) as orderNum from `order` group by `order`.order_date
+    </select>
+    <resultMap id="OrderStatResultMap" type="com.cumt.pojo.OrderStat">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+        <result column="orderNum" jdbcType="INTEGER" property="orderNum" />
+    </resultMap>
 </mapper>

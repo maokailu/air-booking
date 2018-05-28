@@ -1,28 +1,50 @@
 package com.cumt.pojo;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018-05-14.
+ * Created by Administrator on 2018-05-27.
  */
-public class Order {
+public class OrderQuery {
     private int id;
     private String orderId;
-    private String userId;
+    private User user;
     private String contactName;
-    private Date orderDate;
+    private Timestamp orderDate;
     private int orderState;
     private BigDecimal totalTicketPrice;
     private BigDecimal totalFuelSurcharge;
-    private BigDecimal totalAirportTax;
-    private BigDecimal totalPrice;
-    private String cellphone;
-    private String email;
-    private String zipCode;
 
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getContactName() {
         return contactName;
@@ -36,9 +58,6 @@ public class Order {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
 
     public int getOrderState() {
         return orderState;
@@ -80,7 +99,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-
     public String getCellphone() {
         return cellphone;
     }
@@ -105,28 +123,20 @@ public class Order {
         this.zipCode = zipCode;
     }
 
-    public int getId() {
 
-        return id;
+    private BigDecimal totalAirportTax;
+    private BigDecimal totalPrice;
+
+    public List<OrderItemQuery> getOrderItems() {
+        return orderItems;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderItems(List<OrderItemQuery> orderItems) {
+        this.orderItems = orderItems;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    private String cellphone;
+    private String email;
+    private String zipCode;
+    private List<OrderItemQuery> orderItems;
 }

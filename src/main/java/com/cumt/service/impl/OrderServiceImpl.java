@@ -2,9 +2,7 @@ package com.cumt.service.impl;
 
 import com.cumt.mapper.OrderMapper;
 import com.cumt.mapper.PassengerMapper;
-import com.cumt.pojo.Order;
-import com.cumt.pojo.OrderInfo;
-import com.cumt.pojo.User;
+import com.cumt.pojo.*;
 import com.cumt.service.OrderService;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,5 +26,11 @@ public class OrderServiceImpl implements OrderService{
     };
     public List<OrderInfo> getOrdersBySearch(User user){
         return orderMapper.getOrdersBySearch(user);
+    }
+    public List<OrderQuery> getOrders(OrderQuery order){
+        return orderMapper.getOrders(order);
+    }
+    public List<OrderStat> getOrderNumByDate(){
+        return orderMapper.getOrderNumByDate();
     }
 }

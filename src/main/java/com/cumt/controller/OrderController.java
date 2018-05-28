@@ -101,4 +101,20 @@ public class OrderController {
         List<OrderInfo>  orders = orderService.getOrdersBySearch(user);
         return orders;
     }
+    @RequestMapping("getOrders")
+    @ResponseBody
+    public List<OrderQuery>  getOrders(@RequestBody OrderQuery order, HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        List<OrderQuery>  orders = orderService.getOrders(order);
+        return orders;
+    }
+    @RequestMapping("getOrderNumByDate")
+    @ResponseBody
+    public List<OrderStat> getOrderNumByDate(HttpServletRequest request, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Method", "POST, GET");
+        List<OrderStat> orderStat = orderService.getOrderNumByDate();
+        return orderStat;
+    }
 }
