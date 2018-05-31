@@ -71,4 +71,13 @@ public class OrderInfo {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
+    private String flightNo;
+
+    public String getFlightNo() {
+        return flightNo;
+    }
+
+    public void setFlightNo(String flightNo) {
+        this.flightNo = flightNo;
+    }
 }

@@ -15,7 +15,12 @@
         <result column="gender" jdbcType="INTEGER" property="gender" />
     </resultMap>
     <select id="getPassengersByUserId" resultMap="BaseResultMap">
-          select * from `passenger` INNER JOIN `user` on `passenger`.user_id = `user`.user_id where `user`.user_id = 0
+          select * from `passenger` INNER JOIN `user` on `passenger`.user_id = `user`.user_id
+          <where>
+            <if test="userId !=null">
+                user.user_id = #{userId}
+            </if>
+        </where>
     </select>
 
     <insert id="addPassenger">

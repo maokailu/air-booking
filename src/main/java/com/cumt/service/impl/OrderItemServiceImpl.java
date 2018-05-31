@@ -7,6 +7,8 @@ import com.cumt.service.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018-05-15.
  */
@@ -17,5 +19,8 @@ public class OrderItemServiceImpl implements OrderItemService{
 
     public int addOrderItem(OrderItem orderItem, String flightId, int cabinClassId){
         return orderItemMapper.addOrderItem(orderItem, flightId, cabinClassId);
+    };
+    public int createOrderItems(List<OrderItem> orderItems, List<String> flightIds, int cabinClassId){
+        return orderItemMapper.createOrderItems(orderItems, flightIds, cabinClassId);
     };
 }

@@ -19,6 +19,8 @@
         <result column="economy_class_count" jdbcType="INTEGER" property="planeId" />
         <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
         <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
+        <result column="depart_city_name" jdbcType="VARCHAR" property="departCityName" />
+        <result column="arrive_city_name" jdbcType="VARCHAR" property="arriveCityName" />
         <result column="ticket_price" jdbcType="DECIMAL" property="ticketPrice" />
         <result column="airport_tax" jdbcType="DECIMAL" property="airportTax" />
     </resultMap>

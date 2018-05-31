@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +30,14 @@ public class PassengerController {
     PassengerService passengerService;
     @RequestMapping("getPassengers")
     @ResponseBody
-    public List<Passenger> getPassengers(HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
-        List<Passenger> passengers = passengerService.getPassengersByUserId(0);
+    public List<Passenger> getPassengers(@RequestParam(name="userId")String userId, HttpServletRequest request, HttpServletResponse response) {
+        List<Passenger> passengers = passengerService.getPassengersByUserId(userId);
         System.out.print(passengers);
         return passengers;
     }
     @RequestMapping("addPassengers")
     @ResponseBody
     public String addPassengers(@RequestBody Passenger passenger, HttpServletRequest request, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8082");
-        response.setHeader("Access-Control-Allow-Method", "POST, GET");
         int num = passengerService.addPassenger(passenger);
         Map<String,String> result = new HashMap<String, String>();
         result.put("result", "恭喜您，乘客添加成功");

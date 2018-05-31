@@ -22,7 +22,7 @@ public class PassengerServiceImpl implements PassengerService {
     public int addPassenger(Passenger passenger){
         return passengerMapper.addPassenger(passenger);
     };
-    public List<Passenger> getPassengersByUserId(int userId){
+    public List<Passenger> getPassengersByUserId(String userId){
         return passengerMapper.getPassengersByUserId(userId);
     };
 }
