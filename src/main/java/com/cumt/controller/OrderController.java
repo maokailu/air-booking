@@ -28,50 +28,6 @@ public class OrderController {
     OrderItemService orderItemService;
     @Autowired
     FlightService flightService;
-    @RequestMapping("createOrder")
-    @ResponseBody
-    public String createOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request, HttpServletResponse response) {
-        //随机产生订单号
-        String orderId = "6";
-        int orderState = 1;
-        Order order = new Order();
-        order.setOrderId(orderId);
-        order.setUserId(orderInfo.getOrder().getUserId());
-        order.setContactName(orderInfo.getOrder().getContactName());
-        order.setOrderState(orderState);
-        order.setCellphone(orderInfo.getOrder().getCellphone());
-        order.setEmail(orderInfo.getOrder().getEmail());
-        order.setOrderDate(orderInfo.getOrder().getOrderDate());
-        int id = orderService.addOrder(order);
-        if(id!=0){
-            List<Passenger> passengers = new ArrayList<Passenger>();
-            passengers = orderInfo.getPassengers();
-            for (int i = 0; i < passengers.size(); i++) {
-                String passengerId = passengers.get(i).getPassengerId();
-                String orderItemId = "66";
-                OrderItem orderItem = new OrderItem();
-                orderItem.setOrderId(orderId);
-                orderItem.setOrderItemId(orderItemId);
-                orderItem.setPassengerId(passengerId);
-                orderItem.setSeatRequire(orderInfo.getOrderItem().getSeatRequire());
-                String flightId = orderInfo.getTicket().getFlightId();
-                int cabinClassId = orderInfo.getTicket().getCabinClassId();
-                orderItemService.addOrderItem(orderItem, flightId, cabinClassId);
-                flightService.minusClassCount(flightId, cabinClassId);
-            }
-        }
-        System.out.print(orderInfo);
-
-        Map<String,String> result=new HashMap<String, String>();
-        result.put("result", "恭喜您，机票预定成功！");
-        return JSON.toJSONString(result);
-    }
-
-    @RequestMapping("getOrderDetail")
-    @ResponseBody
-    public String getOrderDetail(@RequestBody String orderId, HttpServletRequest request, HttpServletResponse response) {
-        return JSON.toJSONString("");
-    }
 
     @RequestMapping("getOrdersByUserId")
     @ResponseBody
@@ -79,26 +35,22 @@ public class OrderController {
         List<OrderInfo>  orders = orderService.getOrdersByUserId(userId);
         return orders;
     }
+//   查询所有订单及其子订单和我的订单
 
-    @RequestMapping("getOrdersBySearch")
-    @ResponseBody
-    public List<OrderInfo>  getOrdersBySearch(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
-        List<OrderInfo>  orders = orderService.getOrdersBySearch(user);
-        return orders;
-    }
     @RequestMapping("getOrders")
     @ResponseBody
     public List<OrderQuery>  getOrders(@RequestBody OrderQuery order, HttpServletRequest request, HttpServletResponse response) {
         List<OrderQuery>  orders = orderService.getOrders(order);
         return orders;
     }
+//    根据日期统计订单数目
     @RequestMapping("getOrderNumByDate")
     @ResponseBody
     public List<OrderStat> getOrderNumByDate(HttpServletRequest request, HttpServletResponse response) {
         List<OrderStat> orderStat = orderService.getOrderNumByDate();
         return orderStat;
     }
-
+// 创建订单和子订单
     @RequestMapping(value = "booking", method= RequestMethod.POST)
     @ResponseBody
     public int booking(@RequestBody OrderInfo orderInfo, HttpServletRequest request, HttpServletResponse response) {
@@ -112,6 +64,9 @@ public class OrderController {
         order.setCellphone(orderInfo.getOrder().getCellphone());
         order.setEmail(orderInfo.getOrder().getEmail());
         order.setOrderDate(orderInfo.getOrder().getOrderDate());
+        order.setTotalTicketPrice(orderInfo.getOrder().getTotalTicketPrice());
+        order.setTotalAirportTax(orderInfo.getOrder().getTotalAirportTax());
+        order.setTotalPrice(orderInfo.getOrder().getTotalPrice());
         int id = orderService.addOrder(order);
         int result = 0;
         if(id!=0){
@@ -136,8 +91,28 @@ public class OrderController {
         }
         return result;
     }
+    //    根据订单号获得指定订单
+    @RequestMapping("getOrderByOrderId")
+    @ResponseBody
+    public OrderQuery getOrderByOrderId(@RequestParam(name="orderId")String orderId, HttpServletRequest request, HttpServletResponse response) {
+        OrderQuery orderQuery = orderService.getOrderByOrderId(orderId);
+        return orderQuery;
+    }
+    //    根据订单号取消指定订单
+    @RequestMapping("cancelOrderByOrderId")
+    @ResponseBody
+    public int cancelOrderByOrderId(@RequestParam(name="orderId")String orderId, HttpServletRequest request, HttpServletResponse response) {
+//        将主订单状态置为0
+        int result = orderService.cancelOrderByOrderId(orderId);
+        return result;
+    }
+//    将String[]类型转换成List<String>
     private List<String> stringToList(String strs){
         String str[] = strs.split("-");
         return Arrays.asList(str);
     }
 }
+
+//order只包括主订单信息
+//orderInfo为订单相关信息汇总 更简洁不过设计有误
+//orderQuery包括所有关联表信息:用于后台管理

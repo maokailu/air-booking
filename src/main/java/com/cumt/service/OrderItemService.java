@@ -10,6 +10,4 @@ import java.util.List;
  */
 public interface OrderItemService {
     public int addOrderItem(OrderItem orderItem, String flightId, int cabinClassId);
-    public int createOrderItems(List<OrderItem> orderItems,List<String> flightIds,int cabinClassId);
-
 }

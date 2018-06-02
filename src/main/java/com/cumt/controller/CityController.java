@@ -22,10 +22,10 @@ import java.util.Map;
  * Created by Administrator on 2018-05-02.
  */
 @Controller
-@RequestMapping("")
 public class CityController {
     @Autowired
     CityService cityService;
+//    获得热门目的地并按照国家分组 可直接搜索国家表及下面的城市集合
     @RequestMapping("getHotDestinations")
     @ResponseBody
     public String getHotDestinations(@RequestBody Flight flight, HttpServletRequest request, HttpServletResponse response) {
@@ -44,12 +44,15 @@ public class CityController {
         System.out.print(citysGroupByCountry);
         return JSONArray.toJSONString(citysGroupByCountry);
     }
+//    根据百度返回的cityNum获得当前城市信息
     @RequestMapping("getCurrentCityByCityNum")
     @ResponseBody
     public City getCurrentCityByCityNum(@RequestParam(name="cityNum") String cityNum, HttpServletRequest request, HttpServletResponse response) {
         City city = cityService.getCurrentCityByCityNum(cityNum);
         return city;
     }
+//    按城市名、城市代码、机场名、机场代码搜索
+//    得到按城市分组的机场
     @RequestMapping("getCitys")
     @ResponseBody
     public List<City> getCitys(@RequestParam(name="text")String text, HttpServletRequest request, HttpServletResponse response) {

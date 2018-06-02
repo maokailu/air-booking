@@ -24,13 +24,16 @@ public class OrderServiceImpl implements OrderService{
     public int addOrder(Order order){
         return orderMapper.addOrder(order);
     };
-    public List<OrderInfo> getOrdersBySearch(User user){
-        return orderMapper.getOrdersBySearch(user);
-    }
     public List<OrderQuery> getOrders(OrderQuery order){
         return orderMapper.getOrders(order);
     }
     public List<OrderStat> getOrderNumByDate(){
         return orderMapper.getOrderNumByDate();
+    }
+    public OrderQuery getOrderByOrderId(String orderId){
+        return orderMapper.getOrderByOrderId(orderId);
+    }
+    public int cancelOrderByOrderId(String orderId){
+        return orderMapper.cancelOrderByOrderId(orderId);
     }
 }

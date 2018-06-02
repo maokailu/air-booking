@@ -14,4 +14,6 @@ public interface OrderMapper {
     public List<OrderInfo> getOrdersBySearch(@Param("user")User user);
     public List<OrderQuery> getOrders(@Param("order")OrderQuery order);
     public List<OrderStat> getOrderNumByDate();
+    public OrderQuery getOrderByOrderId(@Param("orderId")String orderId);
+    public int cancelOrderByOrderId(@Param("orderId")String orderId);
 }

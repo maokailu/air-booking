@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface OrderItemMapper {
     public int addOrderItem(@Param("orderItem")OrderItem orderItem, @Param("flightId")String flightId, @Param("cabinClassId")int cabinClassId);
-    public int createOrderItems(@Param("orderItems")List<OrderItem> orderItems, @Param("flightIds")List<String> flightIds, @Param("cabinClassId")int cabinClassId);
 }

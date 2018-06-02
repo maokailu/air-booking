@@ -8,9 +8,6 @@ import com.cumt.pojo.FlightSearch;
 import org.apache.ibatis.annotations.Param;
 
 public interface FlightService {
-
     List<Flight> getFlightsBySearch(FlightSearch flightSearch, int start, int size);
     int minusClassCount(String flightId, int classType);
-    List<Flight> getFlightsByAirport(@Param("flightSearch")FlightSearch flightSearch);
-
 }

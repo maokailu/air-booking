@@ -10,8 +10,6 @@ public class Flight implements Serializable {
     private long id;
     private String flightId;
     private String planeId;
-    private String departAirportCode;
-    private String arriveAirportCode;
     private Timestamp departTime;
     private Timestamp returnTime;
     private int flightType;
@@ -20,10 +18,31 @@ public class Flight implements Serializable {
     private int businessClassCount;
     private int economyClassCount;
     private BigDecimal voyage;
+//    常用的city\airport字段,存在pojo里但数据库字段应删
     private String departAirportName;
     private String arriveAirportName;
     private String departCityName;
     private String arriveCityName;
+    private String departCityCode;
+    private String arriveCityCode;
+    private String departAirportCode;
+    private String arriveAirportCode;
+
+    public String getDepartCityCode() {
+        return departCityCode;
+    }
+
+    public void setDepartCityCode(String departCityCode) {
+        this.departCityCode = departCityCode;
+    }
+
+    public String getArriveCityCode() {
+        return arriveCityCode;
+    }
+
+    public void setArriveCityCode(String arriveCityCode) {
+        this.arriveCityCode = arriveCityCode;
+    }
 
     public String getDepartCityName() {
         return departCityName;

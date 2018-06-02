@@ -69,11 +69,6 @@
         </choose>
         limit ${start},${size}
     </select>
-    <select id="getFlightsByAirport" resultMap="BaseResultMap">
-       select * from `flight`
-        where flight.depart_airport_code = #{flightSearch.arriveAirportCode}
-        and flight.arrive_airport_code = #{flightSearch.arriveAirportCode}
-    </select>
     <update id="minusClassCount" >
         update flight
         <set>
