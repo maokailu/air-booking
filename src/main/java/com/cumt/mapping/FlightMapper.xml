@@ -17,15 +17,29 @@
         <result column="first_class_count" jdbcType="INTEGER" property="planeId" />
         <result column="business_class_count" jdbcType="INTEGER" property="planeId" />
         <result column="economy_class_count" jdbcType="INTEGER" property="planeId" />
-        <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
-        <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
-        <result column="depart_city_name" jdbcType="VARCHAR" property="departCityName" />
-        <result column="arrive_city_name" jdbcType="VARCHAR" property="arriveCityName" />
-        <result column="ticket_price" jdbcType="DECIMAL" property="ticketPrice" />
-        <result column="airport_tax" jdbcType="DECIMAL" property="airportTax" />
+        <result column="depart_airport_name_right" jdbcType="VARCHAR" property="departAirportName" />
+        <result column="arrive_airport_name_right" jdbcType="VARCHAR" property="arriveAirportName" />
+        <result column="depart_city_name_right" jdbcType="VARCHAR" property="departCityName" />
+        <result column="arrive_city_name_right" jdbcType="VARCHAR" property="arriveCityName" />
+        <result column="ticket_price_right" jdbcType="DECIMAL" property="ticketPrice" />
+        <result column="airport_tax_right" jdbcType="DECIMAL" property="airportTax" />
     </resultMap>
     <select id="getFlightsBySearch" resultMap="BaseResultMap">
-        select flight.* from `flight`
+        select flight.*,
+        ticket.airport_tax as airport_tax_right,
+        ticket.ticket_price as ticket_price_right,
+        departCity.city_name as depart_city_name_right,
+        arriveCity.city_name as arrive_city_name_right,
+        departCity.city_code as depart_city_code_right,
+        arriveCity.city_code as arrive_city_code_right,
+        departAirport.airport_name as depart_airport_name_right,
+        arriveAirport.airport_name as arrive_airport_name_right
+        from `flight`
+        inner join `ticket` on flight.flight_id = ticket.flight_id
+        inner join `airport` as departAirport on flight.depart_airport_code = departAirport.airport_code
+        inner join `city` as departCity on departAirport.city_code = departCity.city_code
+        inner join `airport` as arriveAirport on flight.arrive_airport_code = arriveAirport.airport_code
+        inner join `city` as arriveCity on arriveAirport.city_code = arriveCity.city_code
         <where>
             <choose>
                 <when test="flightSearch.departAirportCode=='ALL'">
@@ -67,6 +81,7 @@
                 and flight.economy_class_count >= #{flightSearch.passenger}
             </otherwise>
         </choose>
+        order by (ticket.ticket_price + ticket.airport_tax)
         limit ${start},${size}
     </select>
     <update id="minusClassCount" >

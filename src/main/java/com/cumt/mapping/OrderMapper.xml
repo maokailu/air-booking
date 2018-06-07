@@ -4,63 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cumt.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.cumt.pojo.OrderInfo">
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <collection property="order" ofType="com.cumt.pojo.Order">
-            <result column="order_id" jdbcType="VARCHAR" property="orderId" />
-            <result column="order_state" jdbcType="VARCHAR" property="orderState" />
-        </collection>
-        <collection property="passenger" ofType="com.cumt.pojo.Passenger">
-            <result column="name" jdbcType="VARCHAR" property="name" />
-        </collection>
-        <collection property="ticket" ofType="com.cumt.pojo.Ticket">
-            <result column="ticket_id" jdbcType="VARCHAR" property="ticketId" />
-        </collection>
-        <collection property="flight" ofType="com.cumt.pojo.Flight">
-            <result column="flight_id" jdbcType="CHAR" property="flightId" />
-            <result column="depart_airport_name" jdbcType="VARCHAR" property="departAirportName" />
-            <result column="arrive_airport_name" jdbcType="VARCHAR" property="arriveAirportName" />
-            <result column="depart_city_name" jdbcType="VARCHAR" property="departCityName" />
-            <result column="arrive_city_name" jdbcType="VARCHAR" property="arriveCityName" />
-            <result column="depart_time" jdbcType="TIMESTAMP" property="departTime" />
-            <result column="return_time" jdbcType="TIMESTAMP" property="returnTime" />
-        </collection>
-        <collection property="cabinClass" ofType="com.cumt.pojo.CabinClass">
-            <result column="cabin_class_name" jdbcType="VARCHAR" property="cabinClassName" />
-        </collection>
-    </resultMap>
     <insert id="addOrder" parameterType="Order" >
         insert into `order` (order_id, user_id, contact_name, order_date, order_state, total_ticket_price, total_fuel_surcharge, total_airport_tax, total_price, cellphone, email, zip_code) values (#{orderId}, #{userId}, #{contactName}, #{orderDate}, #{orderState}, #{totalTicketPrice}, #{totalFuelSurcharge}, #{totalAirportTax}, #{totalPrice}, #{cellphone}, #{email}, #{zipCode})
     </insert>
-
-    <select id="getOrdersByUserId" resultMap="BaseResultMap">
-        select flight.flight_id,order.order_id,order.order_date,
-        flight.depart_time, flight.return_time,
-        passenger.name,cabin_class.cabin_class_name,ticket.ticket_id,
-        departCity.city_name as depart_city_name,
-        arriveCity.city_name as arrive_city_name,
-        departAirport.airport_name as depart_airport_name,
-        arriveAirport.airport_name as arrive_airport_name
-        from `order` INNER JOIN order_item
-        on `order`.order_id = order_item.order_id
-        INNER JOIN ticket
-        on order_item.ticket_id=ticket.ticket_id
-        inner join flight
-        on ticket.flight_id = flight.flight_id
-        INNER JOIN passenger
-        on order_item.passenger_id = passenger.passenger_id
-        INNER JOIN cabin_class
-        on cabin_class.cabin_class_id = ticket.cabin_class_id
-        inner join `airport` as departAirport on flight.depart_airport_code = departAirport.airport_code
-        inner join `city` as departCity on departAirport.city_code = departCity.city_code
-        inner join `airport` as arriveAirport on flight.arrive_airport_code = arriveAirport.airport_code
-        inner join `city` as arriveCity on arriveAirport.city_code = arriveCity.city_code
-        <where>
-            <if test="userId!=null">
-                `order`.user_id = #{userId}
-            </if>
-        </where>
-    </select>
 
     <resultMap id="OrderResultMap" type="com.cumt.pojo.OrderQuery">
         <id column="order_id" jdbcType="VARCHAR" property="orderId" />
@@ -92,8 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <result column="fuel_surcharge" jdbcType="DECIMAL" property="fuelCharge" />
                 <collection property="flight" ofType="com.cumt.pojo.Flight">
                     <result column="flight_id" jdbcType="CHAR" property="flightId" />
-                    <result column="depart_airport_code_right" jdbcType="VARCHAR" property="departAirportCode" />
-                    <result column="arrive_airport_code_right" jdbcType="VARCHAR" property="arriveAirportCode" />
+                    <result column="depart_airport_code" jdbcType="VARCHAR" property="departAirportCode" />
+                    <result column="arrive_airport_code" jdbcType="VARCHAR" property="arriveAirportCode" />
                     <result column="depart_airport_name_right" jdbcType="VARCHAR" property="departAirportName" />
                     <result column="arrive_airport_name_right" jdbcType="VARCHAR" property="arriveAirportName" />
                     <result column="depart_city_name_right" jdbcType="VARCHAR" property="departCityName" />
@@ -150,12 +96,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 user.user_name LIKE '%${order.user.userName}%'
             </if>
             <if test="order !=null and order.orderDate!=null">
-                order.order_date = DATE_FORMAT(#{order.orderDate},'%Y-%m-%d')
+                `order`.order_date = DATE_FORMAT(#{order.orderDate},'%Y-%m-%d')
             </if>
             <if test="order !=null and order.orderId!=null">
-                order.order_id LIKE '%${order.orderId}%'
+                `order`.order_id LIKE '%${order.orderId}%'
             </if>
         </where>
+        ORDER BY `order`.order_date DESC
     </select>
     <select id="getOrderNumByDate" resultMap="OrderStatResultMap">
         select order_date,count(*) as orderNum from `order` group by `order`.order_date
@@ -172,9 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         departCity.city_code as depart_city_code_right,
         arriveCity.city_code as arrive_city_code_right,
         departAirport.airport_name as depart_airport_name_right,
-        arriveAirport.airport_name as arrive_airport_name_right,
-        departAirport.airport_code as depart_airport_code_right,
-        arriveAirport.airport_code as arrive_airport_code_right
+        arriveAirport.airport_name as arrive_airport_name_right
         from `order`
         INNER JOIN order_item
         on `order`.order_id = order_item.order_id
